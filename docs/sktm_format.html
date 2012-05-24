@@ -1,0 +1,79 @@
+<html>
+<head>
+  <title>SWG Skeleton (.skt) file format.</title>
+  <style type="text/css">
+  </style>
+</head>
+<body style="background-color:white" >
+<hl style="color:black; font-size:25px">SWG Skeleton (.skt) format</hl></br>
+<hl style="color:black; font-size:15px">by <a href="index.html">Xunil</a></hl></br>
+<p style="color:back">
+<ul>
+<li> This file, like most SWG files, is based on the <a href="iff_format.html">IFF</a> format.</li>
+<li> This overview will skip going into detail about the IFF format in general
+and focus purely on the organization of the LOD form.</li>
+<li>If a Form/Record appears multiple times I will only define it the
+first time, unless its structure differs.</li>
+<li>This file format is still being explored, so take this information as
+a guide and realize that some assumptions made here may be incorrect
+or missing details.</li>
+<li>If you discover something I missed or have an error correction,
+  please send a message Xunil on the <a href="http://www.swgemu.com/forums">swgemu forums.</a></li>
+<li><b>NOTE:</b> All values are little-endian, unless otherwise noted.</li>
+</ul>
+
+
+<ul>
+  <li>Form:SKTM</li>
+  <ul>
+    <li>Form:000# <i>(The # is an ASCII numerical character, not sure
+	of the meaning for this form.)</i></li>
+    <ul>
+      <li>Record: INFO <i></i>
+	<ul>
+	  <li>Number of bones - 32-bit unsigned int</li>
+	</ul>
+      </li>
+      <li>Record: NAME <i></i>
+	<ul>
+	  <li>Name of bone: Null terminated ascii string * (Number of bones). <i></i></li>
+	</ul>
+      </li>
+      <li>Record: PRNT <i></i>
+	<ul>
+	  <li>Parent bone index - 32-bit integer * (Number of bones).<i>(Index into bone
+	  list.  -1 for no parent. One index for each bone.) </i></li>
+	</ul>
+      </li>
+      <li>Form: RPRE <i></i>
+	<ul>
+	  <li>Pre-rotation quaternion - 4 32-bit float * (Number of bones).<i></i></li>
+	</ul>
+      </li>
+      <li>Form: RPST <i></i>
+	<ul>
+	  <li>Post-rotation quaternion - 4 32-bit float * (Number of bones).<i></i></li>
+	</ul>
+      </li>
+      <li>Form: BPTR <i></i>
+	<ul>
+	  <li>Bone position - 3 32-bit float * (Number of
+	  bones). <i>XYZ position</i></li>
+	</ul>
+      </li>
+      <li>Form: BPRO <i></i>
+	<ul>
+	  <li>Bone pose?? quaternion - 4 32-bit float * (Number of bones). <i></i></li>
+	</ul>
+      </li>
+      <li>Form: JROR <i></i>
+	<ul>
+	  <li>Bone ??? - 32-bit int * (Number of bones). <i>(Always seems to be 0.)</i></li>
+	</ul>
+      </li>
+    </ul>
+  </ul>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<html>
+<head>
+  <title>SWG Level-Of-Detail (.lod) file format.</title>
+  <style type="text/css">
+  </style>
+</head>
+<body style="background-color:white" >
+<hl style="color:black; font-size:25px">SWG Level-Of-Detail (.lod) format</hl></br>
+<hl style="color:black; font-size:15px">by <a href="index.html">Xunil</a></hl></br>
+<p style="color:back">
+<ul>
+<li> This file, like most SWG files, is based on the <a href="iff_format.html">IFF</a> format.</li>
+<li> This overview will skip going into detail about the IFF format in general
+and focus purely on the organization of the LOD form.</li>
+<li>If a Form/Record appears multiple times I will only define it the
+first time, unless its structure differs.</li>
+<li>This file format is still being explored, so take this information as
+a guide and realize that some assumptions made here may be incorrect
+or missing details.</li>
+<li>If you discover something I missed or have an error correction,
+  please send a message Xunil on the <a href="http://www.swgemu.com/forums">swgemu forums.</a></li>
+<li><b>NOTE:</b> All values are little-endian, unless otherwise noted.</li>
+</ul>
+
+
+<ul>
+  <li>Form:DTLA</li>
+  <ul>
+    <li>Form:000# <i>(The # is an ASCII numerical character, not sure
+	of the meaning for this form, but always seems to be 5,6 or 7)</i></li>
+    <ul>
+      <li><a href="msh_format.html#appr">Form:APPR</a> <i>(Same as one in mesh format.)</i></li>
+      <li>Record:PIVT
+	<ul>
+	  <li>Filename of ???: null terminated ascii
+	    name. <i>(Always seems to be 1 byte of 0x0)</i> </li>
+	  
+	</ul>
+      </li>
+      <li>Record:INFO <i>(Lists ranges for switch in/out of child
+      models.  The block of 3 values repeats, one for each child
+      model.  No.0/In/Out, No.1/In/Out, ...  Number of child nodes is infoRecordSize/12)</i>
+	<ul>
+	  <li>Child Number: 32-bit unsigned int.</li>
+	  <li>Switch in range: 32-bit float.</li>
+	  <li>Switch out range: 32-bit float.</li>
+	</ul>
+      </li>
+      <li>Form:DATA
+	<ul>
+	  <li>Record:CHLD <i>(One child per near/far value in INFO
+	  record. 1 or more )</i>
+	    <ul>
+	      <li>Child number: 32-bit unsigned int</li>
+	      <li>Filename of child model: null terminated ascii
+	      name.  If the filename does not start with appearance/
+	      then it must be added.</li>
+	    </ul>
+	  </li>
+	</ul>
+      </li>
+      <li><a name="radr">Form:RADR</a>
+	<ul>
+	  <li>Record:INFO <i></i>
+	    <ul>
+	      <li>Num IDTL forms: 32-bit unsigned int</li>
+	    </ul>
+	  </li>
+	  <li>Form:IDTL <i>(0 or more)</i>
+	    <ul>
+	      <li>Record:VERT <i>(Number of vertices is vertRecordSize/12.)</i>
+		<ul>
+		  <li>x: 32-bit float.</li>
+		  <li>y: 32-bit float.</li>
+		  <li>z: 32-bit float.</li>
+		</ul>
+	      </li>
+	      <li>Record:INDX <i>(List of indices defining triangles
+	      using the vertices from the VERT record. Number of indices is indxRecordSize/4.)</i>
+		<ul>
+		  <li>index: 32-bit unsigned.</li>
+		</ul>
+	      </li>
+	    </ul>
+	  </li>
+	</ul>
+      </li>
+      <li>Form:TEST 
+	<ul>
+	  <li>Record:INFO <i></i>
+	    <ul>
+	      <li>Num IDTL forms: 32-bit unsigned int</li>
+	    </ul>
+	  </li>
+	  <li>Form: IDTL <i>(0 or more)</i></li>
+	</ul>
+      </li>
+      <li>Form:WRIT
+	<ul>
+	  <li>Record:INFO <i></i>
+	    <ul>
+	      <li>Num IDTL forms: 32-bit unsigned int</li>
+	    </ul>
+	  </li>
+	  <li>Form: IDTL <i>(0 or more)</i></li>
+	</ul>
+      </li>
+    </ul>
+  </ul>
+</ul>
+
+
+
+</body>
+</html>

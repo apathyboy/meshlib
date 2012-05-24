@@ -1,0 +1,48 @@
+<html>
+<head>
+  <title>SWG .iff file format.</title>
+  <style type="text/css">
+  </style>
+</head>
+<body style="background-color:white" >
+<hl style="color:black; font-size:25px">Quick intro to IFF</hl></br>
+<hl style="color:black; font-size:15px">by Xunil</hl></br>
+<p style="color:back">
+SWG uses
+the <a href="http://www.digitalpreservation.gov/formats/fdd/fdd000115.shtml">IFF</a>
+file format for storage virtually all local data files loaded by the
+client.  The basic format is used to store a <a href="http://en.wikipedia.org/wiki/Tree_data_structure">tree</a> exported via a <a href="http://en.wikipedia.org/wiki/Depth-first_search">depth first</a> search.</br>
+The tree is composed of 2 types of nodes: Forms and Records.</br>
+<hl style="color:black; font-size:20px">FORM</hl></br>
+The 12-byte <b>form</b> header is composed of three variables: the form tag,
+the form size and the form type.</br>
+The <b>tag</b> consists of the ASCII string "FORM".</br>
+The <b>size</b> is a
+4-byte, <a href="http://en.wikipedia.org/wiki/Endianness#Big-endian">big-endian</a>
+unsigned integer representing the size of the form (including all
+child forms and records), but excluding the 8 bytes containing the
+FORM and size.</br>
+The <b>type</b> is a 4 byte ASCII string describing the type of form
+(i.e. "MESH", "APPR", "VTXA", ...).</br>
+After the header, the form can contain any combination of child forms,
+records and raw data.
+</br>
+</br>
+
+<hl style="color:black; font-size:20px">RECORD</hl></br>
+The other type of node present in the tree is the <b>record</b>.  The 8-byte
+record header is composed of 2 variables: the record type and
+size.</br>
+The <b>type</b> is a 4 byte ASCII string that identifies the type of
+record. (i.e. "DATA", "NORM", "DOT3", ...)</br>
+The <b>size</b> is a 4-byte, big-endian, unsigned integer representing the size of the record, but excluding the 8 bytes containing the
+type and size.</br>
+The record node can contain raw data only, no forms or records may be
+contained in a record.
+</br>
+
+
+</p>
+
+</body>
+</html>

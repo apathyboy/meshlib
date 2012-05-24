@@ -1,0 +1,101 @@
+How to modify interior layout files.
+
+Interior layout files (.ilf) describe the placement of static objects inside a
+building, cave, bunker... Static objects are those that users cannot
+move/destroy (i.e. chairs/plants/banners in starports, hotels,...)
+
+The first thing you need to do is to gain access to the interior layout files.
+Use your favorite .tre archive extraction program. Linux users can use
+this: home.earthlink.net/~xunil/treLib.tgz Windows users will need to
+search, but the tools are out there.
+
+For this how-to, I chose interiorlayout/theed_hangar2.ilf from the file
+patch_00.tre.
+
+You will also need to download readSWG:
+Linux users: home.earthlink.net/~xunil/meshLib.tgz
+Windows users: home.earthlink.net/~xunil/readSWG.exe
+(Note that readSWG.exe runs well on linux when using a recent version of wine)
+
+Currently readSWG can read several formats, but only write interior layout
+(.ilf) files.
+
+- Run './readSWG interiorlayout/theed_hangar2.ilf > theed_hangar2_ilf.txt'
+
+- Using your favorite text editor edit the file theed_hangar2_ilf.txt.
+
+- Search for the word 'fountain'
+
+You will find a block of text that looks like this:
+
+Object Filename: object/static/structure/naboo/shared_fountain_naboo_style_1.iff
+Object Zone: lobby
+Transform matrix:
+  1.000000 0.000000 0.000000 0.000000
+  0.000000 1.000000 0.000000 -0.026396
+  0.000000 0.000000 1.000000 -67.000000
+
+Now if you don't understand 3d tranformation matrices, read this:
+http://en.wikipedia.org/wiki/3D_projection#First_step:_world_transform
+
+Ok, you say that the matrix in the article is a 4x4 and the one in the file is
+a 3x4. The last row of the file matrix should be assumed to be 0.0 0.0 0.0 1.0
+
+The first thing we are going to do is replace the naboo fountain with a
+corellian one.
+
+Change this line:
+
+Object Filename: object/static/structure/naboo/shared_fountain_naboo_style_1.iff
+
+to this line:
+
+Object Filename: object/static/structure/corellia/shared_corl_fountain_statue_heroic_s01.iff
+
+Now to put the fountain someplace new. While in the game, enter the instance
+you want to modify. In this case, the Theed starport. Press Ctrl-Shift-G,
+you will now get a small window that tells you your location among other
+things. The line named 'Player Cell' is what you are interested in. I chose
+a position in the hangar.
+
+You can see my coords in the upper left of this screenshot:
+http://home.earthlink.net/~xunil/interiorMod02.jpg
+
+My player cell line looks like this:
+Player Cell: 0.2 7.9 -22.2 -6 thm_nboo_thed_hangar hangar
+
+0.2, 7.9 and -22.2 are the x,y,z coordinates respectively.
+-6 is your character's heading.
+thm_nboo_thed_hangar is the interior
+hangar is the zone inside the current interior
+
+With this new information, we will modify the block to look like this:
+
+Object Filename: object/static/structure/corellia/shared_corl_fountain_statue_heroic_s01.iff
+Object Zone: hangar
+Transform matrix:
+  1.000000 0.000000 0.000000 0.200000
+  0.000000 1.000000 0.000000 7.900000
+  0.000000 0.000000 1.000000 -22.200000
+Now its time to compile our changes back into a .ilf file.
+
+- Run './readSWG create theed_hangar2_ilf.txt interiorlayout/theed_hangar2.ilf'
+
+- Assuming that interiorlayout/theed_hangar2.ilf is in your StarWarsGalaxies
+directory, run the client.
+
+- Upon entering the Theed space port you will notice the fountain in the lobby
+is gone. A quick jog up to the hangar and you will see this:
+http://home.earthlink.net/~xunil/interiorMod03.jpg
+
+If you don't want to move the fountain you can just delete the record shown
+above and reconstruct the ilf.
+
+Remember this is a client side modification. So only you will see the
+change. I'm sure eventually the server will be able to push its own .tre
+patches and distribute changes like this.
+
+In the meantime, have fun redecorating your starports, hotels, caves,
+cantinas,...
+
+- Xunil

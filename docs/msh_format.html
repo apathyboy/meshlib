@@ -1,0 +1,369 @@
+<html>
+<head>
+  <title>SWG Mesh (.msh) file format.</title>
+  <style type="text/css">
+  </style>
+</head>
+<body style="background-color:white" >
+<hl style="color:black; font-size:25px">SWG Mesh (.msh) format</hl></br>
+<hl style="color:black; font-size:15px">by <a href="index.html">Xunil</a></hl></br>
+<p style="color:back">
+<ul>
+<li> This file, like most SWG files, is based on the <a href="iff_format.html">IFF</a> format.</li>
+<li> This overview will skip going into detail about the IFF format in general
+and focus purely on the organization of the MESH form.</li>
+<li>If a Form/Record appears multiple times I will only define it the
+first time, unless its structure differs.</li>
+<li>This file format is still being explored, so take this information as
+a guide and realize that some assumptions made here may be incorrect
+or missing details.</li>
+<li>If you discover something I missed or have an error correction,
+  please send a message Xunil on the <a href="http://www.swgemu.com/forums">swgemu forums.</a></li>
+<li><b>NOTE:</b> All values are little-endian, unless otherwise noted.</li>
+</ul>
+</br>
+
+<ul>
+  <li>Form:MESH</li>
+  <ul>
+    <li>Form:000# <i>(The # is an ASCII numerical character, not sure
+	of the meaning for this form.)</i></li>
+    <ul>
+      <li><a name="appr">Form:APPR</a>
+      <ul>
+	<li>Form:0003</li>
+	<li>Form:EXBX <i>(Bounding box) 1 or more required.</i>
+	<ul>
+	  <li>Form:0001</li>
+	  <ul>
+	    <li>Form:EXSP <i>(Bounding sphere.)</i>
+	      <ul>
+	      <li>Form:0001
+		  <ul>
+		    <li><a href="#sphr">Record:SPHR</a></li>
+		  </ul>
+	      </li>
+	      </ul>
+	    </li>
+	    <li><a href="#box">Record:BOX</a></li>
+	  </ul>
+	</ul>
+	</li>
+	<li>Form:NULL<i></i></li>
+	<li>Form:EXSP <i>(Optional additional Bounding sphere. Same
+	format as previous.)</i>
+	</li>
+	<li>Form:XCYL<i></i>
+	  <ul>
+	    <li>Form:0000
+	      <ul>
+		<li><a href="#cyln">Record:CYLN</a></li>
+	      </ul>
+	    </li>
+	  </ul>
+	</li>
+	<li>Form:CMPT<i></i>
+	  <ul>
+	    <li>Form:0000
+	      <ul>
+		<li>Form:CPST
+		  <ul>
+		    <li>Form:0000
+		      <ul>
+			<li>Form:CMSH <i>(Coming soon.)</i></li>
+			  </ul>
+			</li>
+			<li>Form:CMPT <i>(Coming soon.)</i></li>
+			<li>Form:EXBX
+			  <ul>
+			  </ul>
+			</li>
+			<li>Form:EXSP
+			  <ul>
+			  </ul>
+			</li>
+			<li>Form:XCYL
+			  <ul>
+			  </ul>
+			</li>
+		      </ul>
+		    </li>
+		  </ul>
+		</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</li>
+	<li>Form:CMSH <i>(Coming soon.)</i></li>
+	<li>Form:DTAL <i>(Coming soon.)</i></li>
+	<li>Form:HPTS <i>(List of 0 or more attach point records.)</i>
+	  <ul>
+	    <li><a href="#hpnt">Record:HPNT</a></li>
+	  </ul>
+	</li>
+	<li>Form:FLOR
+	  <ul>
+	    <li>Form:DATA
+	      <ul>
+		<li>Size of floor filename(including NULL): unsigned char</li>
+		<li>Floor filename - null terminated ascii string.</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</li>
+	<li>Form:INFO <i>(Not sure yet.)</i></li>
+      </ul>
+      </li>
+      <li>Form:SPS
+	<ul>
+	  <li>Form:000#
+	    <ul>
+	      <li>Record:CNT
+		<ul>
+		  <li>numGeode - 32-bit unsigned int.</li>
+		</ul>
+	      </li>
+	      <li>Form:000# <i>(In this case the # is the number of
+	      this geometry subtree)</i>
+		<ul>
+		  <li>Record:NAME
+		    <ul>
+		      <li>Shader Filename - NULL terminated ascii string.</li>
+		    </ul>
+		  </li>
+		  <li>Record:INFO
+		    <ul>
+		      <li>Unknown(num geometry forms?) - 32-bit unsigned int.</li>
+		    </ul>
+		  </li>
+		  <li>Form:000#
+		    <ul>
+		      <li>Record:INFO
+			<ul>
+			  <li>Unknown - 32-bit unsigned int.</li>
+			  <li>Unknown - 16-bit unsigned short.</li>
+			</ul>
+		      </li>
+		      <li>FORM:VTXA
+			<ul>
+			  <li>FORM:000#
+			    <ul>
+			      <li>Record:INFO
+				<ul>
+				  <li>Unknown(FVF flags?) - 32-bit unsigned int.</li>
+				  <li>numVertices - 32-bit unsigned short.</li>
+				</ul>
+			      </li>
+			      <li>Record:DATA
+				<ul>
+				  <li><a href="#vertexdata">Vertex Data</a></li>
+				</ul>
+			      </li>
+			      <li>Record:INDX
+				<ul>
+				  <li><a href="#vertexindex">Vertex
+				  indices</a></li>
+				</ul>
+			      <li>Record:SIDX <i>(Optional)</i>
+				<ul>
+				  <li><a href="#secondaryindex">Secondary
+				  vertex indices</a></li>
+				</ul>
+			      </li>
+			    </ul>
+			  </li>
+			</ul>
+		      </li>
+		    </ul>
+		  </li>
+		</ul>
+	      </li>
+	    </ul>
+	  </li>
+	</ul>
+      </li>
+    </ul>
+  </ul>
+</ul>
+
+<a name="sphr">
+  <hl style="color:black; font-size:20px">Record:SPHR - Defines a sphere.</hl>
+</a>
+<ul>
+  <li>Sphere center xyz - 3 32-bit float.</li>
+  <li>Sphere radius - 32-bit float.</li>
+</ul>
+
+<a name="box">
+  <hl style="color:black; font-size:20px">Record:BOX - Defines a box.</hl>
+</a>
+<ul>
+  <li>First corner xyz - 3 32-bit float.</li>
+  <li>Second corner xyz - 3 32-bit float.</li>
+</ul>
+
+<a name="cyln">
+  <hl style="color:black; font-size:20px">Record:CYLN - Defines a cylinder.</hl>
+</a>
+<ul>
+  <li> Base xyz, radius, height?- 5 32-bit float.</li>
+</ul>
+
+<a name="hpnt">
+  <hl style="color:black; font-size:20px">Record:HPNT - Attach point.</hl>
+</a>
+<ul>
+  <li>3 row x 4 col transform matrix - 12 32-bit float.</li>
+  <li>Null terminated ascii name - remainder of HPNT
+    record size.</li>
+</ul>
+
+<a name="vertexdata"> </a> 
+<hl style="color:black; font-size:20px">Vertex data</hl></br>
+Before reading the vertex data the bytes per vertex needs to be
+computed.</br>
+<ul>
+BPV = (vertex DATA record size)/numVertices.</br>
+</ul>
+The observed vertex formats seen are as follows:
+<ul>
+  <li>32 bpv
+    <ul>
+      <li>position xyz - 3 32-bit floats.</li>
+      <li>normal xyz - 3 32-bit floats.</li>
+      <li>tex coords 0 uv - 2 32-bit floats.</li>
+    </ul>
+  </li>
+  <li>36 bpv
+    <ul>
+      <li>position xyz - 3 32-bit floats.</li>
+      <li>normal xyz - 3 32-bit floats.</li>
+      <li>color argb - 4 unsigned char.</li>
+      <li>tex coords 0 uv - 2 32-bit floats.</li>
+    </ul>
+  </li>
+  <li>40 bpv
+    <ul>
+      <li>position xyz - 3 32-bit floats.</li>
+      <li>normal xyz - 3 32-bit floats.</li>
+      <li>tex coords 0 uv - 2 32-bit floats.</li>
+      <li>tex coords 1 uv - 2 32-bit floats.</li>
+    </ul>
+  </li>
+  <li>44 bpv
+    <ul>
+      <li>position xyz - 3 32-bit floats.</li>
+      <li>normal xyz - 3 32-bit floats.</li>
+      <li>color argb - 4 unsigned char.</li>
+      <li>tex coords 0 uv - 2 32-bit floats.</li>
+      <li>tex coords 1 uv - 2 32-bit floats.</li>
+    </ul>
+  </li>
+  <li>48 bpv
+    <ul>
+      <li>position xyz - 3 32-bit floats.</li>
+      <li>normal xyz - 3 32-bit floats.</li>
+      <li>tex coords 0 uv - 2 32-bit floats.</li>
+      <li>tex coords 1 uv - 2 32-bit floats.</li>
+      <li>tex coords 2 uv - 2 32-bit floats.</li>
+    </ul>
+  </li>
+  <li>52 bpv
+    <ul>
+      <li>position xyz - 3 32-bit floats.</li>
+      <li>normal xyz - 3 32-bit floats.</li>
+      <li>color argb - 4 unsigned char.</li>
+      <li>tex coords 0 uv - 2 32-bit floats.</li>
+      <li>tex coords 1 uv - 2 32-bit floats.</li>
+      <li>tex coords 2 uv - 2 32-bit floats.</li>
+    </ul>
+  </li>
+  <li>56 bpv
+    <ul>
+      <li>position xyz - 3 32-bit floats.</li>
+      <li>normal xyz - 3 32-bit floats.</li>
+      <li>tex coords 0 uv - 2 32-bit floats.</li>
+      <li>tex coords 1 uv - 2 32-bit floats.</li>
+      <li>tex coords 2 uv - 2 32-bit floats.</li>
+      <li>tex coords 3 uv - 2 32-bit floats.</li>
+    </ul>
+  </li>
+  <li>60 bpv
+    <ul>
+      <li>position xyz - 3 32-bit floats.</li>
+      <li>normal xyz - 3 32-bit floats.</li>
+      <li>color argb - 4 unsigned char.</li>
+      <li>tex coords 0 uv - 2 32-bit floats.</li>
+      <li>tex coords 1 uv - 2 32-bit floats.</li>
+      <li>tex coords 2 uv - 2 32-bit floats.</li>
+      <li>tex coords 3 uv - 2 32-bit floats.</li>
+    </ul>
+  </li>
+  <li>64 bpv
+    <ul>
+      <li>position xyz - 3 32-bit floats.</li>
+      <li>normal xyz - 3 32-bit floats.</li>
+      <li>tex coords 0 uv - 2 32-bit floats.</li>
+      <li>tex coords 1 uv - 2 32-bit floats.</li>
+      <li>tex coords 2 uv - 2 32-bit floats.</li>
+      <li>tex coords 3 uv - 2 32-bit floats.</li>
+      <li>tex coords 4 uv - 2 32-bit floats.</li>
+    </ul>
+  </li>
+  <li>68 bpv
+    <ul>
+      <li>position xyz - 3 32-bit floats.</li>
+      <li>normal xyz - 3 32-bit floats.</li>
+      <li>color argb - 4 unsigned char.</li>
+      <li>tex coords 0 uv - 2 32-bit floats.</li>
+      <li>tex coords 1 uv - 2 32-bit floats.</li>
+      <li>tex coords 2 uv - 2 32-bit floats.</li>
+      <li>tex coords 3 uv - 2 32-bit floats.</li>
+      <li>tex coords 4 uv - 2 32-bit floats.</li>
+    </ul>
+  </li>
+  <li>72 bpv
+    <ul>
+      <li>position xyz - 3 32-bit floats.</li>
+      <li>normal xyz - 3 32-bit floats.</li>
+      <li>tex coords 0 uv - 2 32-bit floats.</li>
+      <li>tex coords 1 uv - 2 32-bit floats.</li>
+      <li>tex coords 2 uv - 2 32-bit floats.</li>
+      <li>tex coords 3 uv - 2 32-bit floats.</li>
+      <li>tex coords 4 uv - 2 32-bit floats.</li>
+      <li>tex coords 5 uv - 2 32-bit floats.</li>
+    </ul>
+  </li>
+</ul>
+
+<a name="vertexindex"> </a> 
+<hl style="color:black; font-size:20px">Vertex index</hl></br>
+Before reading the vertex indices the bytes per index needs to be
+computed.</br>
+<ul>
+BPI = (INDX record size - 4)/numIndices.</br>
+</ul>
+After the bpi is computed, the rest of the record is a series of
+unsigned short or unsigned int values that reference the vertices
+defined in the vertex DATA record.</br>
+So index 0,1,2 = triangle 0, index 3,4,5 = triangle 1, ...</br>
+</br>
+
+<a name="secondaryindex"> </a> 
+<hl style="color:black; font-size:20px">Secondary Vertex index</hl></br>
+Number of matrix/index/triangle sets: 32-bit unsigned int.</br>
+
+<ul>
+  <li>Matrix/index/triangle set.
+    <ul>
+      <li>Rotations? - 3 32-bit floats.</li>
+      <li>Number of indices: - 32-bit unsigned int.</li>
+      <li>Index: Same datatype as primary vertex index.</li>
+    </ul>
+  </li>
+</ul>
+</br>
+
+
+</body>
+</html>

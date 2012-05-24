@@ -1,0 +1,48 @@
+<html>
+<head>
+  <title>SWG Component (.cmp) file format.</title>
+  <style type="text/css">
+  </style>
+</head>
+<body style="background-color:white" >
+<hl style="color:black; font-size:25px">SWG Component (.cmp) format</hl></br>
+<hl style="color:black; font-size:15px">by <a href="index.html">Xunil</a></hl></br>
+<p style="color:back">
+<ul>
+<li> This file, like most SWG files, is based on the <a href="iff_format.html">IFF</a> format.</li>
+<li> This overview will skip going into detail about the IFF format in general
+and focus purely on the organization of the LOD form.</li>
+<li>If a Form/Record appears multiple times I will only define it the
+first time, unless its structure differs.</li>
+<li>This file format is still being explored, so take this information as
+a guide and realize that some assumptions made here may be incorrect
+or missing details.</li>
+<li>If you discover something I missed or have an error correction,
+  please send a message Xunil on the <a href="http://www.swgemu.com/forums">swgemu forums.</a></li>
+<li><b>NOTE:</b> All values are little-endian, unless otherwise noted.</li>
+</ul>
+
+
+<ul>
+  <li>Form:CMPA</li>
+  <ul>
+    <li>Form:000# <i>(The # is an ASCII numerical character, not sure
+	of the meaning for this form.)</i></li>
+    <ul>
+      <li><a href="msh_format.html#appr">Form:APPR</a> <i>(Same as one in mesh format.)</i></li>
+      <li><a href="lod_format.html#radr">Form:RADR</a> <i>(Optional)</i></li>
+      <li>Record:PART <i>(One or more records)</i>
+	<ul>
+	  <li>Filename of part mesh: null terminated ascii
+	    name. <i>(Can reference .lod or .msh files.)</i></li>
+	  <li>3x4 transform matrix - 12 32-bit float<i> With index
+	  3,7, and 11 being the x, y and z translation component.</i></li>
+	  
+	</ul>
+      </li>
+    </ul>
+  </ul>
+</ul>
+
+</body>
+</html>
