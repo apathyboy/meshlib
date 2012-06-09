@@ -409,7 +409,7 @@ unsigned int skmg::readOZC( std::istream &file )
 {
 	 unsigned int xxxxSize;
     std::string type;
-    unsigned int total = readRecordHeader( file, type, xxxxSize );
+    /* unsigned int total = */readRecordHeader( file, type, xxxxSize );
 
 	base::readUnknown(file, xxxxSize);
 
