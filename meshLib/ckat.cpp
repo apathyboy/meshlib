@@ -53,7 +53,7 @@ unsigned int ckat::readCKAT( std::istream &file, std::string path )
   if( form != "FORM" )
     {
       std::cout << "Expected FORM: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found " << form << " " << type
 	    << ": " << size-4 << " bytes"
@@ -101,7 +101,7 @@ unsigned int ckat::readINFO( std::istream &file )
     if( type != "INFO" )
     {
         std::cout << "Expected record of type INFO: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -205,7 +205,7 @@ unsigned int ckat::readSROT( std::istream &file )
     if( type != "SROT" )
     {
         std::cout << "Expected record of type SROT: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << ": " << srotSize-8 << " bytes"
 	      << std::endl;
@@ -283,7 +283,7 @@ unsigned int ckat::readSTRN( std::istream &file )
     if( type != "STRN" )
     {
         std::cout << "Expected record of type STRN: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << ": " << strnSize-8 << " bytes"
 	      << std::endl;
@@ -320,7 +320,7 @@ unsigned int ckat::readXFIN( std::istream &file )
     if( type != "XFIN" )
     {
         std::cout << "Expected record of type XFIN: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << ": " << xfinSize-8 << " bytes"
 	      << std::endl;
@@ -375,7 +375,7 @@ unsigned int ckat::readQCHN( std::istream &file )
     if( type != "QCHN" )
     {
         std::cout << "Expected record of type QCHN: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << ": " << qchnSize-8 << " bytes"
 	      << std::endl;
@@ -473,7 +473,7 @@ unsigned int ckat::readMSGS( std::istream &file )
     if( type != "INFO" )
     {
         std::cout << "Expected record of type INFO: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << ": " << infoSize-8 << " bytes"
 	      << std::endl;
@@ -510,7 +510,7 @@ unsigned int ckat::readMESG( std::istream &file )
     if( type != "MESG" )
     {
         std::cout << "Expected record of type MESG: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << ": " << mesgSize-8 << " bytes"
 	      << std::endl;
@@ -552,7 +552,7 @@ unsigned int ckat::readLOCT( std::istream &file )
     if( type != "LOCT" )
     {
         std::cout << "Expected record of type LOCT: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << ": " << loctSize-8 << " bytes"
 	      << std::endl;
@@ -595,7 +595,7 @@ unsigned int ckat::readCHNL( std::istream &file )
     if( type != "CHNL" )
     {
         std::cout << "Expected record of type CHNL: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << ": " << chnlSize-8 << " bytes"
 	      << std::endl;

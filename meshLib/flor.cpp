@@ -87,7 +87,7 @@ unsigned int flor::readVERT( std::istream &file )
   if( type != "VERT" )
     {
       std::cout << "Expected record of type VERT: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found VERT record" << std::endl;
 
@@ -133,7 +133,7 @@ unsigned int flor::readTRIS( std::istream &file )
   if( type != "TRIS" )
     {
       std::cout << "Expected record of type TRIS: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found TRIS record" << std::endl;
   std::cout << "Size: " << trisSize << std::endl;

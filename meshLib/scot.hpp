@@ -28,40 +28,40 @@
 #include <string>
 #include <vector>
 
-#ifndef SBOT_HPP
-#define SBOT_HPP
+#ifndef SCOT_HPP
+#define SCOT_HPP
 
 namespace ml
 {
-  class sbot : public stot
+  class scot : public stot
   {
   public:
-    sbot();
-    ~sbot();
+    scot();
+    ~scot();
     bool isRightType( std::istream &file )
     {
-      return isOfType( file, "SBOT" );
+      return isOfType( file, "SCOT" );
     }
-    unsigned int readSBOT( std::istream &file );
+    unsigned int readSCOT( std::istream &file );
 
-    std::string getInteriorLayoutFilename() const
+    /*std::string getInteriorLayoutFilename() const
     {
       return interiorLayoutFilename;
-    }
+    }*/
+
+	std::string getScotBaseObjectFilename() {
+		return scotBaseObjectFilename;
+	}
 
     void print() const;
 
-	std::string getSbotBaseObjectFilename() {
-		return sbotBaseObjectFilename;
-	}
-
   protected:
-    unsigned int readSBOTXXXX( std::istream &file );
+    unsigned int readSCOTXXXX( std::istream &file );
 
-    std::string sbotBaseObjectFilename;
-    std::string terrainModificationFilename;
+    std::string scotBaseObjectFilename;
+    /*std::string terrainModificationFilename;
     std::string interiorLayoutFilename;
-    unsigned int numNodes;
+    unsigned int numNodes;*/
 
   };
 }

@@ -76,7 +76,7 @@ unsigned int sd3d::read0001( std::istream &file )
     if( type != "0001" )
     {
         std::cout << "Expected record of type 0001: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 

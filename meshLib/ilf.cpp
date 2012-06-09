@@ -143,7 +143,7 @@ unsigned int ilf::readILF( std::istream &file )
     if( form != "FORM" )
     {
 	std::cout << "Expected FORM: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
 #if DEBUG
     std::cout << "Found " << form << " " << type
@@ -182,7 +182,7 @@ unsigned int ilf::readNODE( std::istream &file )
     if( type != "NODE" )
     {
 	std::cout << "Expected record of type NODE: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found NODE record"
 	      << ": " << nodeSize-8 << " bytes"

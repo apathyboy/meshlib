@@ -79,7 +79,7 @@ unsigned int affectorColorConstant::read( std::istream &file,
   if( form != "FORM" || type != "0000" )
     {
       std::cout << "Expected Form of type 0000: " << type << std::endl;
-      std::exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0000 form" << std::endl;
 
@@ -90,7 +90,7 @@ unsigned int affectorColorConstant::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected DATA record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -157,7 +157,7 @@ unsigned int affectorColorRampFractal::read( std::istream &file,
   if( type != "PARM" )
     {
       std::cout << "Expected PARM record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found PARM record" << std::endl;
 
@@ -215,7 +215,7 @@ unsigned int affectorColorRampHeight::read( std::istream &file,
   if( form != "FORM" || type != "0000" )
     {
       std::cout << "Expected Form of type 0000: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0000 form" << std::endl;
 
@@ -226,7 +226,7 @@ unsigned int affectorColorRampHeight::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected DATA record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -294,7 +294,7 @@ unsigned int affectorEnvironment::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -350,7 +350,7 @@ unsigned int affectorExclude::read( std::istream &file,
   if( form != "FORM" || type != "0000" )
     {
       std::cout << "Expected Form of type 0000: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0000 form" << std::endl;
 
@@ -361,7 +361,7 @@ unsigned int affectorExclude::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected DATA record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -415,7 +415,7 @@ unsigned int affectorRadialFarConstant::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected DATA record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -475,7 +475,7 @@ unsigned int affectorRadialConstant::read( std::istream &file,
   if( form != "FORM" || type != "0002" )
     {
       std::cout << "Expected Form of type 0002: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0002 form" << std::endl;
 
@@ -486,7 +486,7 @@ unsigned int affectorRadialConstant::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected DATA record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -546,7 +546,7 @@ unsigned int affectorFloraConstant::read( std::istream &file,
   if( form != "FORM" || type != "0004" )
     {
       std::cout << "Expected Form of type 0004: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0004 form" << std::endl;
 
@@ -557,7 +557,7 @@ unsigned int affectorFloraConstant::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected DATA record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -624,7 +624,7 @@ affectorFloraNonCollidableConstant::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected DATA record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -685,7 +685,7 @@ unsigned int affectorHeightConstant::read( std::istream &file,
   if( form != "FORM" || type != "0000" )
     {
       std::cout << "Expected Form of type 0000: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0000 form" << std::endl;
 
@@ -695,7 +695,7 @@ unsigned int affectorHeightConstant::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -751,7 +751,7 @@ unsigned int affectorHeightFractal::read( std::istream &file,
   if( form != "FORM" || type != "0003" )
     {
       std::cout << "Expected Form of type 0003: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0003 form" << std::endl;
 
@@ -765,7 +765,7 @@ unsigned int affectorHeightFractal::read( std::istream &file,
   if( type != "PARM" )
     {
       std::cout << "Expected PARM record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found PARM record" << std::endl;
 
@@ -823,7 +823,7 @@ unsigned int affectorHeightTerrace::read( std::istream &file,
   if( form != "FORM" || type != "0004" )
     {
       std::cout << "Expected Form of type 0004: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0004 form" << std::endl;
 
@@ -834,7 +834,7 @@ unsigned int affectorHeightTerrace::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected DATA record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -889,7 +889,7 @@ unsigned int affectorRiver::read( std::istream &file,
   if( form != "FORM" || type != "0005" )
     {
       std::cout << "Expected Form of type 0005: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0005 form" << std::endl;
 
@@ -955,7 +955,7 @@ unsigned int affectorRoad::read( std::istream &file,
   if( form != "FORM" || type != "0005" )
     {
       std::cout << "Expected Form of type 0005: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0005 form" << std::endl;
 
@@ -1025,7 +1025,7 @@ unsigned int affectorShaderConstant::read( std::istream &file,
   if( form != "FORM" || type != "0001" )
     {
       std::cout << "Expected Form of type 0001: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0001 form" << std::endl;
 
@@ -1037,7 +1037,7 @@ unsigned int affectorShaderConstant::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -1091,7 +1091,7 @@ unsigned int affectorShaderReplace::read( std::istream &file,
   if( form != "FORM" || type != "0001" )
     {
       std::cout << "Expected Form of type 0001: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0001 form" << std::endl;
 
@@ -1102,7 +1102,7 @@ unsigned int affectorShaderReplace::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected DATA record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -1200,7 +1200,7 @@ unsigned int affectorFilterFractal::read( std::istream &file,
   if( form != "FORM" || type != "0005" )
     {
       std::cout << "Expected Form of type 0005: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0005 form" << std::endl;
 
@@ -1214,7 +1214,7 @@ unsigned int affectorFilterFractal::read( std::istream &file,
   if( type != "PARM" )
     {
       std::cout << "Expected PARM record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found PARM record" << std::endl;
 
@@ -1280,7 +1280,7 @@ unsigned int affectorFilterHeight::read( std::istream &file,
   if( form != "FORM" || type != "0002" )
     {
       std::cout << "Expected Form of type 0002: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0002 form" << std::endl;
 
@@ -1290,7 +1290,7 @@ unsigned int affectorFilterHeight::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -1350,7 +1350,7 @@ unsigned int affectorFilterShader::read( std::istream &file,
   if( form != "FORM" || type != "0000" )
     {
       std::cout << "Expected Form of type 0000: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0000 form" << std::endl;
 
@@ -1361,7 +1361,7 @@ unsigned int affectorFilterShader::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected DATA record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -1412,7 +1412,7 @@ unsigned int affectorFilterSlope::read( std::istream &file,
   if( form != "FORM" || type != "0002" )
     {
       std::cout << "Expected Form of type 0002: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0002 form" << std::endl;
 
@@ -1423,7 +1423,7 @@ unsigned int affectorFilterSlope::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected DATA record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -1473,7 +1473,7 @@ unsigned int trnAffector::readIHDR( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 

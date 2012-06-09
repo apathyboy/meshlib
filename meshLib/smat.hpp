@@ -46,6 +46,10 @@ namespace ml
     unsigned int readSMAT( std::istream &file );
     void print() const;
 
+	std::vector<std::string>& getMSGNS() {
+		return msgns;
+	}
+
   protected:
     unsigned int readINFO( std::istream &file );
     unsigned int readMSGN( std::istream &file );
@@ -57,6 +61,7 @@ namespace ml
     unsigned int numMSGN;
     unsigned short numSKTI;
   private:
+	  std::vector<std::string> msgns;
   };
 } 
 #endif

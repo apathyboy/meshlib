@@ -75,7 +75,7 @@ unsigned int sd2d::read0003( std::istream &file )
     if( type != "0003" )
     {
         std::cout << "Expected record of type 0003: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 

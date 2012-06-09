@@ -1,6 +1,6 @@
 /** -*-c++-*-
- *  \class  sbot
- *  \file   sbot.cpp
+ *  \class  scot
+ *  \file   scot.cpp
  *  \author Kenneth R. Sewell III
 
  meshLib is used for the parsing and exporting .msh models.
@@ -28,66 +28,76 @@
  */
 
 #include <meshLib/base.hpp>
-#include <meshLib/sbot.hpp>
+#include <meshLib/scot.hpp>
 
 #include <iostream>
 #include <cstdlib>
 
 using namespace ml;
 
-sbot::sbot()
+scot::scot()
 {
 }
 
-sbot::~sbot()
+scot::~scot()
 {
 }
 
-unsigned int sbot::readSBOT( std::istream &file )
+unsigned int scot::readSCOT( std::istream &file )
 {
-    unsigned int sbotSize;
-    unsigned int total = readFormHeader( file, "SBOT", sbotSize );
-    sbotSize += 8;
-    std::cout << "Found SBOT form" << std::endl;
+    unsigned int scotSize;
+    unsigned int total = readFormHeader( file, "SCOT", scotSize );
+    scotSize += 8;
+    std::cout << "Found SCOT form" << std::endl;
 
-    total += readDERV( file, sbotBaseObjectFilename );
+    total += readDERV( file, scotBaseObjectFilename );
+
+	unsigned int verSize; std::string nexttype; std::string nextform;
+	peekHeader(file, nextform, verSize, nexttype);
 
     unsigned int size0001;
-    total += readFormHeader( file, "0001", size0001 );
+    total += readFormHeader( file, nexttype, size0001 );
     size0001 += 8;
-    std::cout << "Found 0001 form" << std::endl;
+    std::cout << "Found " << nexttype << " form" << std::endl;
 
     total += readPCNT( file, numNodes );
     for( unsigned int i = 0; i < numNodes; ++i )
       {
-	total += readSBOTXXXX( file );
+	total += readSCOTXXXX( file );
       }
 
     total += readSTOT( file );
 
-    if( sbotSize == total )
+//	total += readSHOT( file );
+
+    if( scotSize == total )
     {
-	std::cout << "Finished reading SBOT" << std::endl;
+	std::cout << "Finished reading SCOT" << std::endl;
     }
     else
     {
-	std::cout << "FAILED in reading SBOT" << std::endl;
-	std::cout << "Read " << total << " out of " << sbotSize
+	std::cout << "FAILED in reading SCOT" << std::endl;
+	std::cout << "Read " << total << " out of " << scotSize
                   << std::endl;
      }
 
     return total;
 }
 
-void sbot::print() const
+void scot::print() const
 {
 }
 
-unsigned int sbot::readSBOTXXXX( std::istream &file )
+unsigned int scot::readSCOTXXXX( std::istream &file )
 {
     unsigned int xxxxSize;
     std::string type;
     unsigned int total = readRecordHeader( file, type, xxxxSize );
+
+	base::readUnknown(file, xxxxSize);
+
+	return xxxxSize + 8;
+/*
     if( type != "XXXX" )
     {
         std::cout << "Expected record of type XXXX: " << type << std::endl;
@@ -153,5 +163,5 @@ unsigned int sbot::readSBOTXXXX( std::istream &file )
                   << std::endl;
     }
 
-    return total;
+    return total;*/
 }

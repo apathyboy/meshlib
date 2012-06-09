@@ -56,7 +56,7 @@ unsigned int cach::readCACH( std::istream &file, std::string path )
   if( type != "0000" )
     {
       std::cout << "Expected type " << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found type: " << type << std::endl;
   

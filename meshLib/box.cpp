@@ -39,7 +39,7 @@ unsigned int box::readBOX( std::istream &file )
   if( type != "BOX " )
     {
       std::cout << "Expected record of type BOX: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found BOX record" << std::endl;
 

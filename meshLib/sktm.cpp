@@ -56,7 +56,7 @@ unsigned int sktm::readSKTM( std::istream &file )
     if( form != "FORM" )
     {
 	std::cout << "Expected Form" << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found form of type: " << type<< std::endl;
 
@@ -92,7 +92,7 @@ unsigned int sktm::readINFO( std::istream &file )
     if( type != "INFO" )
     {
         std::cout << "Expected record of type INFO: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -122,7 +122,7 @@ unsigned int sktm::readNAME( std::istream &file )
     if( type != "NAME" )
     {
         std::cout << "Expected record of type NAME: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -162,14 +162,14 @@ unsigned int sktm::readPRNT( std::istream &file )
     if( type != "PRNT" )
     {
         std::cout << "Expected record of type PRNT: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
     if( (prntSize-8)/numBones != 4 )
       {
 	std::cout << "Expected 4 byte values" << std::endl;
-	exit( 0 );
+	throw std::exception();
       }
 
     int parent;
@@ -214,14 +214,14 @@ unsigned int sktm::readRPRE( std::istream &file )
     if( type != "RPRE" )
     {
         std::cout << "Expected record of type RPRE: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
     if( (rpreSize-8)/numBones != 16 )
       {
 	std::cout << "Expected 16 byte values" << std::endl;
-	exit( 0 );
+	throw std::exception();
       }
 
     std::cout << std::fixed;
@@ -270,14 +270,14 @@ unsigned int sktm::readRPST( std::istream &file )
     if( type != "RPST" )
     {
         std::cout << "Expected record of type RPST: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
     if( (rpstSize-8)/numBones != 16 )
       {
 	std::cout << "Expected 16 byte values" << std::endl;
-	exit( 0 );
+	throw std::exception();
       }
 
     std::cout << std::fixed;
@@ -326,14 +326,14 @@ unsigned int sktm::readBPTR( std::istream &file )
     if( type != "BPTR" )
     {
         std::cout << "Expected record of type BPTR: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
     if( (bptrSize-8)/numBones != 12 )
       {
 	std::cout << "Expected 12 byte values" << std::endl;
-	exit( 0 );
+	throw std::exception();
       }
 
     float x, y, z;
@@ -377,14 +377,14 @@ unsigned int sktm::readBPRO( std::istream &file )
     if( type != "BPRO" )
     {
         std::cout << "Expected record of type BPRO: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
     if( (bproSize-8)/numBones != 16 )
       {
 	std::cout << "Expected 16 byte values" << std::endl;
-	exit( 0 );
+	throw std::exception();
       }
 
     float value;
@@ -431,14 +431,14 @@ unsigned int sktm::readJROR( std::istream &file )
     if( type != "JROR" )
     {
         std::cout << "Expected record of type JROR: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
     if( (jrorSize-8)/numBones != 4 )
       {
 	std::cout << "Expected 4 byte values" << std::endl;
-	exit( 0 );
+	throw std::exception();
       }
 
     unsigned int value;

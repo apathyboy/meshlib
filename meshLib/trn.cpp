@@ -89,7 +89,7 @@ unsigned int trn::readTRNDATA( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected DATA record: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << debugString << "Found DATA record" << std::endl;
 
@@ -238,7 +238,7 @@ unsigned int trn::readTGEN( std::istream &file, const std::string &debugString )
   if( form != "FORM" )
     {
       std::cout << "Expected Form: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found FORM: " << type << std::endl;
 
@@ -280,7 +280,7 @@ unsigned int trn::readTGEN( std::istream &file, const std::string &debugString )
       else
 	{
 	  std::cout << "Expected FORM, found: " << form << std::endl;
-	  std::exit( 0 );
+	  throw std::exception();
 	}
     }
 
@@ -310,7 +310,7 @@ unsigned int trn::readWMAP( std::istream &file, const std::string &debugString )
   if( type != "WMAP" )
     {
       std::cout << "Expected record of type WMAP: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << debugString << "Found WMAP record of size: "
 	    << wmapSize << std::endl;
@@ -320,7 +320,7 @@ unsigned int trn::readWMAP( std::istream &file, const std::string &debugString )
       std::cout << dbgStr << "WMAP size: " << wmapSize
 		<< " does not match expected size: "
 		<< ( mapHeight * mapWidth ) << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
 
   unsigned char x;
@@ -360,7 +360,7 @@ unsigned int trn::readSMAP( std::istream &file, const std::string &debugString )
   if( type != "SMAP" )
     {
       std::cout << "Expected record of type SMAP: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << debugString << "Found SMAP record of size: " << smapSize
 	    << std::endl;
@@ -371,7 +371,7 @@ unsigned int trn::readSMAP( std::istream &file, const std::string &debugString )
       std::cout << "SMAP size: " << smapSize
 		<< " does not match expected size: "
 		<< ( mapHeight * mapWidth ) << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
 
   unsigned char x;
@@ -413,7 +413,7 @@ unsigned int trn::readSFAM( std::istream &file,
   if( type != "SFAM" )
     {
       std::cout << "Expected record of type SFAM: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << debugString << "Found SFAM record of size: "
 	    << sfamSize << std::endl;
@@ -495,7 +495,7 @@ unsigned int trn::readMapDATA( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record of size: " << size << std::endl;
 
@@ -544,7 +544,7 @@ unsigned int trn::readSGRP( std::istream &file, const std::string &debugString )
   if( form != "FORM" )
     {
       std::cout << "Expected Form: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found FORM: " << type << std::endl;
 
@@ -578,7 +578,7 @@ unsigned int trn::readFFAM( std::istream &file, const std::string &debugString )
   if( type != "FFAM" )
     {
       std::cout << "Expected record of type FFAM: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << debugString << "Found FFAM record" << std::endl;
   
@@ -671,7 +671,7 @@ unsigned int trn::readFGRP( std::istream &file, const std::string &debugString )
   if( form != "FORM" )
     {
       std::cout << "Expected Form: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found FORM: " << type << std::endl;
 
@@ -705,7 +705,7 @@ unsigned int trn::readRFAM( std::istream &file,
   if( type != "RFAM" )
     {
       std::cout << "Expected record of type RFAM: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << debugString << "Found RFAM record" << std::endl;
   
@@ -822,7 +822,7 @@ unsigned int trn::readRGRP( std::istream &file, const std::string &debugString )
   if( form != "FORM" || type != "RGRP" )
     {
       std::cout << "Expected Form of type RGRP: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << debugString << "Found RGRP form" << std::endl;
 
@@ -832,7 +832,7 @@ unsigned int trn::readRGRP( std::istream &file, const std::string &debugString )
   if( form != "FORM" )
     {
       std::cout << "Expected Form: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found FORM: " << type << std::endl;
 
@@ -868,7 +868,7 @@ unsigned int trn::readEFAM( std::istream &file, const std::string &debugString )
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -920,7 +920,7 @@ unsigned int trn::readEGRP( std::istream &file, const std::string &debugString )
   if( form != "FORM" || type != "EGRP" )
     {
       std::cout << "Expected Form of type EGRP: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << debugString << "Found EGRP form" << std::endl;
 
@@ -930,7 +930,7 @@ unsigned int trn::readEGRP( std::istream &file, const std::string &debugString )
   if( form != "FORM" )
     {
       std::cout << "Expected Form: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found FORM: " << type << std::endl;
 
@@ -963,7 +963,7 @@ unsigned int trn::readMFRC( std::istream &file, const std::string &debugString )
   if( form != "FORM" || type != "MFRC" )
     {
       std::cout << "Expected Form of type MFRC: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << debugString << "Found MFRC form" << std::endl;
 
@@ -972,7 +972,7 @@ unsigned int trn::readMFRC( std::istream &file, const std::string &debugString )
   if( form != "FORM" || type != "0001" )
     {
       std::cout << "Expected Form of type 0001: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found 0001 form" << std::endl;
 
@@ -980,7 +980,7 @@ unsigned int trn::readMFRC( std::istream &file, const std::string &debugString )
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -1053,7 +1053,7 @@ unsigned int trn::readMFAM( std::istream &file, const std::string &debugString )
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -1098,7 +1098,7 @@ unsigned int trn::readMGRP( std::istream &file, const std::string &debugString )
   if( form != "FORM" )
     {
       std::cout << "Expected Form: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found FORM: " << type << std::endl;
 

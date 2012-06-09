@@ -56,7 +56,7 @@ unsigned int foot::readFOOT( std::istream &file )
     if( form != "FORM" )
     {
 	std::cout << "Expected Form" << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found form of type: " << type<< std::endl;
 
@@ -87,7 +87,7 @@ unsigned int foot::readINFO( std::istream &file  )
     if( type != "INFO" )
     {
         std::cout << "Expected record of type INFO: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -133,7 +133,7 @@ unsigned int foot::readPRNT( std::istream &file )
     if( type != "PRNT" )
     {
         std::cout << "Expected record of type PRNT: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 

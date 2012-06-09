@@ -45,6 +45,10 @@ namespace ml
     unsigned int readSTOT( std::istream &file );
     void print() const;
 
+	std::string getStotBaseObjectFilename() {
+		return stotBaseObjectFilename;
+	}
+
   protected:
     unsigned int readSTOTXXXX( std::istream &file );
 

@@ -54,7 +54,7 @@ unsigned int cstb::readCSTB( std::istream &file )
     if( form != "FORM" )
     {
 	std::cout << "Expected FORM: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found " << form << " " << type
 	      << ": " << size-4 << " bytes"
@@ -91,7 +91,7 @@ unsigned int cstb::readDATA( std::istream &file )
     if( type != "DATA" )
     {
 	std::cout << "Expected record of type DATA: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found DATA Record"
 	      << ": " << size-8 << " bytes"
@@ -122,7 +122,7 @@ unsigned int cstb::readCRCT( std::istream &file )
     if( type != "CRCT" )
     {
 	std::cout << "Expected record of type CRCT: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found CRCT record"
 	      << ": " << size-8 << " bytes"
@@ -158,7 +158,7 @@ unsigned int cstb::readSTRT( std::istream &file )
     if( type != "STRT" )
     {
 	std::cout << "Expected record of type STRT: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found STRT record"
 	      << ": " << size-8 << " bytes"
@@ -195,7 +195,7 @@ unsigned int cstb::readSTNG( std::istream &file )
    if( type != "STNG" )
    {
        std::cout << "Expected record of type STNG: " << type << std::endl;
-       exit( 0 );
+       throw std::exception();
    }
    std::cout << "Found STNG record"
 	     << ": " << size-8 << " bytes"

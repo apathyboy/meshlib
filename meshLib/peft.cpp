@@ -54,7 +54,7 @@ unsigned int peft::readPEFT( std::istream &file, std::string path )
   if( form != "FORM" )
     {
       std::cout << "Expected FORM: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found " << form << " " << type
 	    << ": " << size-4 << " bytes"
@@ -100,7 +100,7 @@ unsigned int peft::readEMGP( std::istream &file )
     if( form != "FORM" )
       {
 	std::cout << "Expected FORM: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
       }
     std::cout << "Found " << form << " " << type
 	      << ": " << size-4 << " bytes"
@@ -142,7 +142,7 @@ unsigned int peft::readEMTR( std::istream &file )
     if( form != "FORM" )
       {
 	std::cout << "Expected FORM: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
       }
     std::cout << "Found " << form << " " << type
 	      << ": " << size-4 << " bytes"
@@ -198,7 +198,7 @@ unsigned int peft::readPTIM( std::istream &file )
     if( type != "0001" )
     {
         std::cout << "Expected record of type 0001: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type
 	      << ": " << size << " bytes"
@@ -239,7 +239,7 @@ unsigned int peft::readWVFM( std::istream &file )
     if( type != "0001" )
     {
         std::cout << "Expected record of type 0001: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type
 	      << ": " << size << " bytes"
@@ -315,7 +315,7 @@ unsigned int peft::readPTQD( std::istream &file )
     if( type != "0000" )
       {
         std::cout << "Expected record of type 0000: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
       }
     std::cout << "Found record " << type
 	      << ": " << size << " bytes" 
@@ -354,7 +354,7 @@ unsigned int peft::readPTEX( std::istream &file )
     if( type != "0000" )
       {
         std::cout << "Expected record of type 0000: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
       }
     std::cout << "Found record " << type
 	      << ": " << size << " bytes" 
@@ -421,7 +421,7 @@ unsigned int peft::readPTCL( std::istream &file )
     if( type != "0000" )
       {
         std::cout << "Expected record of type 0000: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
       }
     std::cout << "Found record " << type
 	      << ": " << size << " bytes" 
@@ -531,7 +531,7 @@ unsigned int peft::read0000( std::istream &file, unsigned int &num )
     if( type != "0000" )
     {
         std::cout << "Expected record of type 0000: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type
 	      << ": " << size << " bytes" 
@@ -562,7 +562,7 @@ unsigned int peft::readEMTR0000( std::istream &file )
     if( type != "0000" )
     {
         std::cout << "Expected record of type 0000: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type
 	      << ": " << size << " bytes" 

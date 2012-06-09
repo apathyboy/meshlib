@@ -56,7 +56,7 @@ unsigned int dtii::readDTII( std::istream &file )
     if( form != "FORM" )
     {
 	std::cout << "Expected FORM: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found " << form << " " << type
 	      << ": " << size-4 << " bytes"
@@ -93,7 +93,7 @@ unsigned int dtii::readCOLS( std::istream &file )
     if( type != "COLS" )
     {
 	std::cout << "Expected record of type COLS: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found COLS record"
 	      << ": " << colsSize-8 << " bytes"
@@ -134,7 +134,7 @@ unsigned int dtii::readTYPE( std::istream &file )
     if( type != "TYPE" )
     {
 	std::cout << "Expected record of type TYPE: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found TYPE record"
 	      << ": " << typeSize-8 << " bytes"
@@ -173,7 +173,7 @@ unsigned int dtii::readROWS( std::istream &file )
     if( type != "ROWS" )
     {
 	std::cout << "Expected record of type ROWS: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found ROWS record"
 	      << ": " << rowsSize-8 << " bytes"
@@ -241,7 +241,7 @@ unsigned int dtii::readROWS( std::istream &file )
 	      {
 		std::cout << "Error: Unknown type: " << columnType[i]
 			  << std::endl;
-		exit( 0 );
+		throw std::exception();
 	      }
 	}
 	std::cout << std::endl;

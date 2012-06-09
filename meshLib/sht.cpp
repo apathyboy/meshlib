@@ -67,7 +67,7 @@ unsigned int sht::readSHT( std::istream &file, std::string path )
   if( form != "FORM" )
     {
       std::cout << "Expected FORM: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found " << form << " " << type
 	    << ": " << size-4 << " bytes"
@@ -100,7 +100,7 @@ unsigned int sht::readSHT( std::istream &file, std::string path )
 	  else
 	    {
 	      std::cout << "Unexpected form: " << type << std::endl;
-	      exit( 0 );
+	      throw std::exception();
 	    }
 	}
       else if ( form == "NAME" )
@@ -110,7 +110,7 @@ unsigned int sht::readSHT( std::istream &file, std::string path )
       else
 	{
 	  std::cout << "Unexpected record: " << form << std::endl;
-	  exit( 0 );
+	  throw std::exception();
 	}
     }
 
@@ -151,7 +151,7 @@ unsigned int sht::readMATS( std::istream &file )
       if( type != "TAG " )
 	{
 	  std::cout << "Expected record of type TAG: " << type << std::endl;
-	  exit( 0 );
+	  throw std::exception();
 	}
       std::cout << "Found " << type
 		<< ": " << size << " bytes"
@@ -168,7 +168,7 @@ unsigned int sht::readMATS( std::istream &file )
       if( type != "MATL" )
 	{
 	  std::cout << "Expected record of type MATL: " << type << std::endl;
-	  exit( 0 );
+	  throw std::exception();
 	}
       std::cout << "Found record " << type
 		<< ": " << size << " bytes"
@@ -177,7 +177,7 @@ unsigned int sht::readMATS( std::istream &file )
       if( 68 != size )
 	{
 	  std::cout << "Expected MATL size 68: " << size << std::endl;
-	  exit( 0 );
+	  throw std::exception();
 	}
 
       file.read( (char *)ambient, sizeof( float ) * 4 );
@@ -273,7 +273,7 @@ unsigned int sht::readTXM( std::istream &file )
   if( form != "FORM" )
     {
       std::cout << "Expected Form of type 0001: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found " << form << " " << type
 	    << ": " << size-4 << " bytes"
@@ -284,7 +284,7 @@ unsigned int sht::readTXM( std::istream &file )
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
 
   std::string textureTag;
@@ -301,7 +301,7 @@ unsigned int sht::readTXM( std::istream &file )
       if( type != "NAME" )
 	{
 	  std::cout << "Expected record of type NAME: " << type << std::endl;
-	  exit( 0 );
+	  throw std::exception();
 	}
 
       std::string textureName;
@@ -419,7 +419,7 @@ unsigned int sht::readTXM( std::istream &file )
       else
 	{
 	  std::cout << "Unknown texture tag: " << textureTag << std::endl;
-	  exit( 0 );
+	  throw std::exception();
 	}
 
       texTag.push_back( textureTag );
@@ -454,7 +454,7 @@ unsigned int sht::readTCSS( std::istream &file )
   if( type != "0000" )
     {
       std::cout << "Expected record of type 0000: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found record " << type
 	    << ": " << size << " bytes"
@@ -578,7 +578,7 @@ unsigned int sht::readTCSS( std::istream &file )
       else
 	{
 	  std::cout << "Unknown texture tag: " << texName << std::endl;
-	  exit( 0 );
+	  throw std::exception();
 	}
     }
     
@@ -610,7 +610,7 @@ unsigned int sht::readTFNS( std::istream &file )
   if( type != "0000" )
     {
       std::cout << "Expected record of type 0000: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found record " << type
 	    << ": " << size << " bytes"
@@ -646,7 +646,7 @@ unsigned int sht::readTSNS( std::istream &file )
   if( type != "0000" )
     {
       std::cout << "Expected record of type 0000: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found record " << type
 	    << ": " << size << " bytes"
@@ -682,7 +682,7 @@ unsigned int sht::readARVS( std::istream &file )
   if( type != "0000" )
     {
       std::cout << "Expected record of type 0000: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found record " << type
 	    << ": " << size << " bytes"
@@ -723,7 +723,7 @@ unsigned int sht::readEFCT( std::istream &file )
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found record " << type 
 	    << ": " << size << " bytes" 

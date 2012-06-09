@@ -44,7 +44,7 @@ unsigned int model::readSPHR( std::istream &file,
   if( type != "SPHR" )
     {
       std::cout << "Expected record of type SPHR: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found SPHR record" << std::endl;
 
@@ -86,7 +86,7 @@ unsigned int model::readCYLN( std::istream &file,
   if( type != "CYLN" )
     {
       std::cout << "Expected record of type CYLN: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found CYLN record" << std::endl;
 
@@ -268,7 +268,7 @@ unsigned int model::readIDTL( std::istream &file,
   if( form != "FORM" )
     {
       std::cout << "Expected FORM: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found FORM" << std::endl;
 
@@ -303,7 +303,7 @@ unsigned int model::readVERT( std::istream &file,
   if( type != "VERT" )
     {
       std::cout << "Expected record of type VERT: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found VERT record" << std::endl;
 
@@ -350,7 +350,7 @@ unsigned int model::readINDX( std::istream &file,
   if( type != "INDX" )
     {
       std::cout << "Expected record of type INDX: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found INDX record" << std::endl;
 
@@ -435,7 +435,8 @@ unsigned int model::readAPPR( std::istream &file )
 	      }
 	    else if( "HPTS" == type )
 	      {
-		total += readHPTS( file );
+		//total += readHPTS( file );
+			  total += readUnknown( file, size+8 );
 	      }
 	    else if( "FLOR" == type )
 	      {
@@ -450,14 +451,14 @@ unsigned int model::readAPPR( std::istream &file )
 		std::cout << "Expected form of type NULL, EXBX, EXSP, XCYL, CMPT, CMSH, DTAL, HPTS, FLOR or INFO: " 
 			  << type
 			  <<std::endl;
-		exit( 0 );
+		throw std::exception();
 	      }
 	  }
 	else
 	  {
 	    std::cout << "Expected FORM: " << form 
 		      <<std::endl;
-		exit( 0 );
+		throw std::exception();
 	  }
       }
 
@@ -485,7 +486,7 @@ unsigned int model::readHPNT( std::istream &file )
   if( type != "HPNT" )
     {
       std::cout << "Expected record of type HPNT: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found HPNT record" << std::endl;
 
@@ -604,7 +605,7 @@ unsigned int model::readFLOR( std::istream &file )
     if( type != "DATA" )
     {
 	std::cout << "Expected record of type DATA: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Size: " << size << std::endl;
 
@@ -679,7 +680,7 @@ unsigned int model::readCPST( std::istream &file )
     if( form != "FORM")
     {
 	std::cout << "Expected FORM not: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found " << form << " " << type
 	      << ": " << size-4 << " bytes"
@@ -719,7 +720,7 @@ unsigned int model::readCPST( std::istream &file )
 	else
 	  {
 	    std::cout << "Unexpected type: " << type << std::endl;
-	    exit( 0 );
+	    throw std::exception();
 	  }
       }
 
@@ -754,7 +755,7 @@ unsigned int model::readCMSH( std::istream &file )
     if( form != "FORM")
     {
 	std::cout << "Expected FORM not: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found " << form << " " << type
 	      << ": " << size-4 << " bytes"
@@ -796,7 +797,7 @@ unsigned int model::readDTAL( std::istream &file )
     if( form != "FORM")
     {
 	std::cout << "Expected FORM not: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found " << form << " " << type
 	      << ": " << size-4 << " bytes"
@@ -827,7 +828,7 @@ unsigned int model::readDYN( std::istream &file )
   if( type != "DYN " )
     {
       std::cout << "Expected record of type DYN : " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found DYN  record" << std::endl;
 

@@ -40,6 +40,9 @@ namespace ml
     bool isRightType( std::istream &file );
     unsigned int readSTR( std::istream &file );
     void print() const;
+	std::map< std::string, std::string >* getMap() {
+		return &strMap;
+	}
 
   protected:
 

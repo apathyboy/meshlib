@@ -44,6 +44,10 @@ namespace ml
     }
     unsigned int readSHOT( std::istream &file );
     void print() const;
+
+	std::string getShotBaseObjectFilename() {
+		return shotBaseObjectFilename;
+	}
   
     void setAppearanceFilename( const std::string &filename )
     {
@@ -54,11 +58,20 @@ namespace ml
     {
       return appearanceFilename;
     }
+
+	const std::string &getClientDataFile() const 
+	{
+		return clientDataFile;
+	}
   
     void setPortalLayoutFilename( const std::string &filename )
     {
       portalLayoutFilename = filename;
     }
+
+	float getScale() {
+		return scale;
+	}
   
     const std::string &getPortalLayoutFilename() const
     {
@@ -91,7 +104,7 @@ namespace ml
     unsigned short collisionActionFlags;
     unsigned short collisionActionPassFlags;
     unsigned short collisionActionBlockFlags;
-    unsigned short scale;
+    float scale;
     unsigned short gameObjectType;
     unsigned char  sendToClient;
     unsigned short scaleThresholdBeforeExtentTest;

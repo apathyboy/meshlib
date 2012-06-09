@@ -1,6 +1,6 @@
 /** -*-c++-*-
- *  \class  sbot
- *  \file   sbot.hpp
+ *  \class  cldf
+ *  \file   cldf.hpp
  *  \author Kenneth R. Sewell III
 
  meshLib is used for the parsing and exporting .msh models.
@@ -22,47 +22,41 @@
  along with meshLib; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include <meshLib/stot.hpp>
+#include <meshLib/base.hpp>
 
 #include <fstream>
 #include <string>
-#include <vector>
 
-#ifndef SBOT_HPP
-#define SBOT_HPP
+#ifndef CLDF_HPP
+#define CLDF_HPP
 
 namespace ml
 {
-  class sbot : public stot
+  class cldf : public base
   {
   public:
-    sbot();
-    ~sbot();
+    cldf();
+    ~cldf();
     bool isRightType( std::istream &file )
     {
-      return isOfType( file, "SBOT" );
+      return isOfType( file, "CLDF" );
     }
-    unsigned int readSBOT( std::istream &file );
-
-    std::string getInteriorLayoutFilename() const
-    {
-      return interiorLayoutFilename;
-    }
-
-    void print() const;
-
-	std::string getSbotBaseObjectFilename() {
-		return sbotBaseObjectFilename;
+    unsigned int readCLDF( std::istream &file );
+	unsigned int readWEAR( std::istream &file );
+	void print() const {
 	}
-
+    
+	std::vector<std::string>& getWearMeshes()
+    {
+      return wearMeshes;
+    }
+    
   protected:
-    unsigned int readSBOTXXXX( std::istream &file );
-
-    std::string sbotBaseObjectFilename;
-    std::string terrainModificationFilename;
-    std::string interiorLayoutFilename;
-    unsigned int numNodes;
-
+    //unsigned int readNAME( std::istream &file, std::string &filename );
+    
+  private:
+	  std::vector<std::string> wearMeshes;
   };
 }
+
 #endif

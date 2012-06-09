@@ -294,13 +294,13 @@ unsigned int trnLayer::read( std::istream &file,
           else
             {
               std::cout << "Unexpected form: " << type << std::endl;
-              exit( 0 );
+              throw std::exception();
             }
         }
       else
         {
           std::cout << "Unexpected record: " << form << std::endl;
-          exit( 0 );
+          throw std::exception();
         }
     }
 
@@ -352,7 +352,7 @@ unsigned int trnLayer::readIHDR( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -386,7 +386,7 @@ unsigned int trnLayer::readADTA( std::istream &file,
   if( type != "ADTA" )
     {
       std::cout << "Expected record of type ADTA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << debugString << "Found ADTA record" << std::endl;
 

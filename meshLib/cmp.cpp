@@ -81,7 +81,7 @@ unsigned int cmp::readCMP( std::istream &file, std::string path )
   if( form != "FORM" || type != "CMPA" )
     {
       std::cout << "Expected Form of type CMPA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found CMPA form" << std::endl;
 
@@ -90,7 +90,7 @@ unsigned int cmp::readCMP( std::istream &file, std::string path )
   if( form != "FORM" )
     {
       std::cout << "Expected Form " << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found form of type: " << type << std::endl;
 
@@ -112,7 +112,7 @@ unsigned int cmp::readCMP( std::istream &file, std::string path )
 	  else
 	    {
 	      std::cout << "Unexpected FORM: " << type << std::endl;
-	      exit( 0 );
+	      throw std::exception();
 	    }
 	}
       else if( form == "PART" )
@@ -122,7 +122,7 @@ unsigned int cmp::readCMP( std::istream &file, std::string path )
       else
 	{
 	  std::cout << "Unexpected record: " << form << std::endl;
-	  exit( 0 );
+	  throw std::exception();
 	}
     }
 
@@ -151,7 +151,7 @@ unsigned int cmp::readPART( std::istream &file )
     if( type != "PART" )
     {
 	std::cout << "Expected record of type PART: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found PART record" << std::endl;
 
@@ -205,7 +205,7 @@ unsigned int cmp::readRADR( std::istream &file )
     if( form != "FORM" || type != "RADR" )
     {
 	std::cout << "Expected Form of type RADR: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found RADR form" << std::endl;
 
@@ -214,7 +214,7 @@ unsigned int cmp::readRADR( std::istream &file )
     if( type != "INFO" )
     {
 	std::cout << "Expected record of type INFO: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found INFO record" << std::endl;
 

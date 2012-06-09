@@ -45,6 +45,10 @@ namespace ml
     unsigned int readSTAT( std::istream &file );
     void print() const;
 
+	std::string getStatBaseObjectFilename() {
+		return statBaseObjectFilename;
+	}
+
   protected:
     
   private:

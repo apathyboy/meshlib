@@ -56,7 +56,7 @@ unsigned int eft::readEFT( std::istream &file, std::string path )
   if( form != "FORM" )
     {
       std::cout << "Expected FORM: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found " << form << " " << type
 	    << ": " << size-4 << " bytes"
@@ -68,12 +68,12 @@ unsigned int eft::readEFT( std::istream &file, std::string path )
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   if( size != 2 )
     {
       std::cout << "Expected DATA record of size 2: " << size << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
 
   unsigned short numIMPL;
@@ -113,7 +113,7 @@ unsigned int eft::readIMPL( std::istream &file )
     if( form != "FORM")
     {
 	std::cout << "Expected FORM not: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found " << form << " " << type
 	      << ": " << size-4 << " bytes"
@@ -143,7 +143,7 @@ unsigned int eft::readIMPL( std::istream &file )
 	else
 	{
 	    std::cout << "Unexpected record: " << form << std::endl;
-	    exit( 0 );
+	    throw std::exception();
 	}
 
     }
@@ -170,7 +170,7 @@ unsigned int eft::readSCAP( std::istream &file )
     if( type != "SCAP" )
     {
         std::cout << "Expected record of type SCAP: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type 
 	      << " (Set Capabilities?) "
@@ -183,7 +183,7 @@ unsigned int eft::readSCAP( std::istream &file )
     for( unsigned int i = 0; i < numScap; ++i )
     {
       total += base::read( file, data );
-      std::cout << std::bitset<32>( data ) << " " << std::endl;
+      std::cout << std::bitset<32>( (int)data ) << " " << std::endl;
     }
     total += scapSize;
 
@@ -209,7 +209,7 @@ unsigned int eft::readOPTN( std::istream &file )
     if( type != "OPTN" )
     {
         std::cout << "Expected record of type OPTN: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type
 	      << ": " << optnSize << " bytes"
@@ -240,7 +240,7 @@ unsigned int eft::readIMPLDATA( std::istream &file )
     if( type != "DATA" )
     {
         std::cout << "Expected record of type DATA: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type
 	      << ": " << impldataSize << " bytes" 
@@ -277,7 +277,7 @@ unsigned int eft::readPASS( std::istream &file )
     if( form != "FORM" )
     {
         std::cout << "Expected FORM not: " << form << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << form << " " << type
 	      << ": " << size-4 << " bytes"
@@ -287,7 +287,7 @@ unsigned int eft::readPASS( std::istream &file )
     if( type != "DATA" )
     {
         std::cout << "Expected record of type DATA: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type
 	      << ": " << size << " bytes" 
@@ -315,7 +315,7 @@ unsigned int eft::readPASS( std::istream &file )
     else
     {
 	std::cout << "Unexpected FORM: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
 
     if( passSize == total )
@@ -347,7 +347,7 @@ unsigned int eft::readPVSH( std::istream &file )
     if( type != "0000" )
     {
         std::cout << "Expected record of type 0000: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type
 	      << ": " << size << " bytes"
@@ -386,7 +386,7 @@ unsigned int eft::readPFFP( std::istream &file )
     if( type != "0001" )
     {
         std::cout << "Expected record of type 0001: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type
 	      << ": " << size << " bytes"
@@ -422,7 +422,7 @@ unsigned int eft::readSTAG( std::istream &file )
     if( type != "0000" )
     {
         std::cout << "Expected record of type 0000: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type
 	      << ": " << size << " bytes"
@@ -460,7 +460,7 @@ unsigned int eft::readPPSH( std::istream &file )
     if( form != "FORM" )
     {
         std::cout << "Expected FORM not: " << form << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << form << " " << type
 	      << ": " << size-4 << " bytes"
@@ -470,7 +470,7 @@ unsigned int eft::readPPSH( std::istream &file )
     if( type != "DATA" )
     {
         std::cout << "Expected record of type DATA: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type
 	      << ": " << size << " bytes" 
@@ -518,7 +518,7 @@ unsigned int eft::readPTXM( std::istream &file )
     if( type != "0002" )
     {
         std::cout << "Expected record of type 0002: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
 #endif
     std::cout << "Found record " << type

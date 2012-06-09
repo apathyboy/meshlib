@@ -56,7 +56,7 @@ unsigned int prto::readPRTO( std::istream &file, std::string path )
   if( form != "FORM" )
     {
       std::cout << "Expected FORM: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found " << form << " " << type
 	    << ": " << size-4 << " bytes"
@@ -92,7 +92,7 @@ unsigned int prto::readDATA( std::istream &file )
     if( type != "DATA" )
     {
         std::cout << "Expected record of type DATA: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type 
 	      << ": "
@@ -130,7 +130,7 @@ unsigned int prto::readLGHT( std::istream &file )
     if( type != "LGHT" )
     {
         std::cout << "Expected record of type LGHT: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type 
 	      << ": "
@@ -298,7 +298,7 @@ unsigned int prto::readPRTLRecord( std::istream &file )
     if( type != "PRTL" )
     {
         std::cout << "Expected record of type PRTL: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type 
 	      << ": "
@@ -353,7 +353,7 @@ unsigned int prto::readCELL( std::istream &file )
     if( form != "FORM")
     {
 	std::cout << "Expected FORM not: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found " << form << " " << type
 	      << ": " << size-4 << " bytes"
@@ -408,7 +408,7 @@ unsigned int prto::readCELL( std::istream &file )
 	else
 	  {
 	    std::cout << "Unexpected type: " << type << std::endl;
-	    exit( 0 );
+	    throw std::exception();
 	  }
       }
  
@@ -437,7 +437,7 @@ unsigned int prto::readCELLDATA( std::istream &file,
     if( type != "DATA" )
     {
         std::cout << "Expected record of type DATA: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type 
 	      << ": "
@@ -511,7 +511,7 @@ unsigned int prto::readPRTL( std::istream &file,
     if( type != "0004" && type != "0005" )
     {
         std::cout << "Expected record of type 0004: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type
 	      << ": " << size << " bytes"
@@ -577,7 +577,7 @@ unsigned int prto::readPGRF( std::istream &file )
     if( form != "FORM")
     {
 	std::cout << "Expected FORM not: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found " << form << " " << type
 	      << ": " << size-4 << " bytes"
@@ -614,7 +614,7 @@ unsigned int prto::readCRC( std::istream &file )
     if( type != "CRC " )
     {
         std::cout << "Expected record of type CRC: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type 
 	      << ": "
@@ -649,7 +649,7 @@ unsigned int prto::readMETA( std::istream &file )
     if( type != "META" )
     {
         std::cout << "Expected record of type META: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type 
 	      << ": "
@@ -684,7 +684,7 @@ unsigned int prto::readPNOD( std::istream &file )
     if( type != "PNOD" )
     {
         std::cout << "Expected record of type PNOD: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type 
 	      << ": "
@@ -748,7 +748,7 @@ unsigned int prto::readPEDG( std::istream &file )
     if( type != "PEDG" )
     {
         std::cout << "Expected record of type PEDG: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type 
 	      << ": "
@@ -799,7 +799,7 @@ unsigned int prto::readECNT( std::istream &file )
     if( type != "ECNT" )
     {
         std::cout << "Expected record of type ECNT: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type 
 	      << ": "
@@ -842,7 +842,7 @@ unsigned int prto::readESTR( std::istream &file )
     if( type != "ESTR" )
     {
         std::cout << "Expected record of type ESTR: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found record " << type 
 	      << ": "

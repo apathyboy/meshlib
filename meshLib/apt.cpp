@@ -55,7 +55,7 @@ unsigned int apt::readAPT( std::istream &file )
     if( form != "FORM" || type != "APT " )
     {
 	std::cout << "Expected Form of type APT: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found APT form" << std::endl;
 
@@ -64,7 +64,7 @@ unsigned int apt::readAPT( std::istream &file )
     if( form != "FORM" )
     {
 	std::cout << "Expected Form" << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found form of type: " << type<< std::endl;
 
@@ -96,7 +96,7 @@ unsigned int apt::readNAME( std::istream &file, std::string &filename )
     if( type != "NAME" )
     {
         std::cout << "Expected record of type NAME: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 

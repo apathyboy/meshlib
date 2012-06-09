@@ -54,7 +54,7 @@ unsigned int trnBoundary::readIHDR( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -128,7 +128,7 @@ unsigned int boundaryPolygon::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -218,7 +218,7 @@ unsigned int boundaryPolyline::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      std::exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
   
@@ -297,7 +297,7 @@ unsigned int boundaryCircle::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 
@@ -362,7 +362,7 @@ unsigned int boundaryRectangle::read( std::istream &file,
   if( "FORM" != form )
     {
       std::cout << "Expected FORM" << std::endl;
-      std::exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found " << brecType << " form" << std::endl;
 
@@ -373,7 +373,7 @@ unsigned int boundaryRectangle::read( std::istream &file,
   if( type != "DATA" )
     {
       std::cout << "Expected record of type DATA: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << dbgStr << "Found DATA record" << std::endl;
 

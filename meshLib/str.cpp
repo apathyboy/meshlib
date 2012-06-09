@@ -78,8 +78,10 @@ unsigned int str::readSTR( std::istream &file )
     std::cout << "Num strings: " << numStrings << std::endl;
 
     // Allocate vectors to hold IDs and descriptions...
-    std::vector< std::string > id( numStrings );
-    std::vector< std::string > desc( numStrings );
+    //std::vector< std::string > id( numStrings );
+	std::map<int, std::string> id;
+    //std::vector< std::string > desc( numStrings );
+	std::map<int, std::string> desc;
 
     //Read the descriptions
     unsigned int num, key, size;
@@ -102,7 +104,8 @@ unsigned int str::readSTR( std::istream &file )
       // number of 2-byte characters
       total +=  size * 2;
       
-      desc[num-1] = description;
+      //desc[num-1] = description;
+	  desc[num] = description;
     }
 
     // Read the ID's
@@ -119,16 +122,29 @@ unsigned int str::readSTR( std::istream &file )
       // Number of characters
       total += size;
       
-      id[num-1] = name;
+      //id[num-1] = name;
+	  id[num] = name;
     }
 
     // Erase current map, populate with new data...
     strMap.clear();
-    for( unsigned int i = 0; i < numStrings; ++i )
+
+	std::map<int, std::string>::const_iterator end = id.end();
+
+	for (std::map<int, std::string>::const_iterator it = id.begin(); it != end; ++it) {
+		int num = it->first;
+		std::string id = it->second;
+
+		//std::string value = desc[num];
+
+		strMap[id] = desc[num];
+	}
+
+   /* for( unsigned int i = 0; i < numStrings; ++i )
     {
 	//std::cout << id[i] << ": " << desc[i] << std::endl;
 	strMap[id[i]] = desc[i];
-    }
+    }*/
 
     return total;
 }

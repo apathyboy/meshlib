@@ -23,9 +23,9 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include <meshLib/base.hpp>
+#include <memory>
 #include <string>
 #include <list>
-#include <memory>
 
 #include <meshLib/trnBoundary.hpp>
 #include <meshLib/trnAffector.hpp>

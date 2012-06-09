@@ -56,7 +56,7 @@ unsigned int skmg::readSKMG( std::istream &file )
     if( form != "FORM" )
     {
 	std::cout << "Expected Form" << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found form of type: " << type<< std::endl;
 
@@ -82,7 +82,8 @@ unsigned int skmg::readSKMG( std::istream &file )
 	      }
 	    else if( type == "HPTS" )
 	      {
-		total += readHPTS( file );
+		//total += readHPTS( file );
+			  total += readUnknown( file, size+8 );
 	      }
 	    else if( type == "TRTS" )
 	      {
@@ -91,7 +92,7 @@ unsigned int skmg::readSKMG( std::istream &file )
 	    else
 	      {
 		std::cout << "Unexpected form: " << type << std::endl;
-		exit( 0 );
+		throw std::exception();
 	      }
 	  }
 	else if( form == "XFNM" )
@@ -137,7 +138,7 @@ unsigned int skmg::readSKMG( std::istream &file )
 	else
 	  {
 	    std::cout << "Unexpected record: " << form << std::endl;
-	    exit( 0 );
+	    throw std::exception();
 	  }
       }
 
@@ -184,7 +185,7 @@ unsigned int skmg::readPSDT( std::istream &file, psdt &newPsdt )
 	    else
 	      {
 		std::cout << "Unexpected form: " << type << std::endl;
-		exit( 0 );
+		throw std::exception();
 	      }
 	  }
 	else if( form == "NAME" )
@@ -214,7 +215,7 @@ unsigned int skmg::readPSDT( std::istream &file, psdt &newPsdt )
 	else
 	  {
 	    std::cout << "Unexpected record: " << form << std::endl;
-	    exit( 0 );
+	    throw std::exception();
 	  }
       }
 
@@ -291,10 +292,23 @@ unsigned int skmg::readBLT( std::istream &file, blt &newBlt )
     bltSize += 8;
     std::cout << "Found BLT form" << std::endl;
 
+
     total += readBLTINFO( file, newBlt );
 
-    total += readBLTPOSN( file, newBlt.numPos );
-    total += readBLTNORM( file, newBlt.numNorm );
+	std::string peekType, peekForm;
+	unsigned int peekSize;
+	peekHeader(file, peekForm, peekSize, peekType);
+
+	if (peekForm == "POSN") {
+		total += readBLTPOSN( file, newBlt.numPos );
+
+		peekHeader(file, peekForm, peekSize, peekType);
+	}
+
+	if (peekForm == "NORM") {
+		total += readBLTNORM( file, newBlt.numNorm );
+	}
+
     if( total < bltSize )
       {
 	total += readDOT3( file );
@@ -328,7 +342,7 @@ unsigned int skmg::readOZN( std::istream &file )
     if( type != "OZN " )
     {
         std::cout << "Expected record of type OZN: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -362,7 +376,7 @@ unsigned int skmg::readFOZC( std::istream &file )
     if( type != "FOZC" )
     {
         std::cout << "Expected record of type FOZC: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -393,6 +407,15 @@ unsigned int skmg::readFOZC( std::istream &file )
 
 unsigned int skmg::readOZC( std::istream &file )
 {
+	 unsigned int xxxxSize;
+    std::string type;
+    unsigned int total = readRecordHeader( file, type, xxxxSize );
+
+	base::readUnknown(file, xxxxSize);
+
+	return xxxxSize + 8;
+
+	/*
     std::string type;
     unsigned int ozcSize;
     unsigned int total = readRecordHeader( file, type, ozcSize );
@@ -400,7 +423,7 @@ unsigned int skmg::readOZC( std::istream &file )
     if( type != "OZC " )
     {
         std::cout << "Expected record of type OZC: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -425,7 +448,7 @@ unsigned int skmg::readOZC( std::istream &file )
                   << std::endl;
      }
 
-    return total;
+    return total;*/
 }
 
 unsigned int skmg::readZTO( std::istream &file )
@@ -437,7 +460,7 @@ unsigned int skmg::readZTO( std::istream &file )
     if( type != "ZTO " )
     {
         std::cout << "Expected record of type ZTO: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -471,7 +494,7 @@ unsigned int skmg::readSKTM( std::istream &file )
     if( type != "SKTM" )
     {
         std::cout << "Expected record of type SKTM: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -510,7 +533,7 @@ unsigned int skmg::readTXCI( std::istream &file, psdt &newPsdt )
     if( type != "TXCI" )
     {
         std::cout << "Expected record of type TXCI: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -577,7 +600,7 @@ unsigned int skmg::readPRIM( std::istream &file, psdt &newPsdt )
 	if( form == "FORM" )
 	  {
 	    std::cout << "Unexpected form: " << type << std::endl;
-	    exit( 0 );
+	    throw std::exception();
 	  }
 	else if( form == "ITL " )
 	  {
@@ -590,7 +613,7 @@ unsigned int skmg::readPRIM( std::istream &file, psdt &newPsdt )
 	else
 	  {
 	    std::cout << "Unexpected record: " << form << std::endl;
-	    exit( 0 );
+	    throw std::exception();
 	  }
       }
 
@@ -617,7 +640,7 @@ unsigned int skmg::readTCSD( std::istream &file, psdt &newPsdt )
     if( type != "TCSD" )
     {
         std::cout << "Expected record of type TCSD: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -659,7 +682,7 @@ unsigned int skmg::readITL( std::istream &file, psdt &newPsdt )
     if( type != "ITL " )
     {
         std::cout << "Expected record of type ITL: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -705,7 +728,7 @@ unsigned int skmg::readOITL( std::istream &file, psdt &newPsdt )
     if( type != "OITL" )
     {
         std::cout << "Expected record of type OITL: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -755,7 +778,7 @@ unsigned int skmg::readINFO( std::istream &file )
     if( type != "INFO" )
     {
         std::cout << "Expected record of type INFO: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -829,7 +852,7 @@ unsigned int skmg::readPRIMINFO( std::istream &file, psdt &newPsdt )
     if( type != "INFO" )
     {
         std::cout << "Expected record of type PRIMINFO: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -860,7 +883,7 @@ unsigned int skmg::readBLTINFO( std::istream &file, blt &newBlt )
     if( type != "INFO" )
     {
         std::cout << "Expected record of type BLTINFO: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -896,7 +919,7 @@ unsigned int skmg::readPOSN( std::istream &file )
     if( type != "POSN" )
     {
         std::cout << "Expected record of type POSN: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found POSN: " << posnSize << std::endl;
 
@@ -938,7 +961,7 @@ unsigned int skmg::readNORM( std::istream &file )
     if( type != "NORM" )
     {
         std::cout << "Expected record of type NORM: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -979,7 +1002,7 @@ unsigned int skmg::readDOT3( std::istream &file )
     if( type != "DOT3" )
     {
         std::cout << "Expected record of type DOT3: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -1025,7 +1048,7 @@ unsigned int skmg::readDOT3Index( std::istream &file, psdt &newPsdt  )
     if( type != "DOT3" )
     {
         std::cout << "Expected record of type DOT3: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -1059,7 +1082,7 @@ unsigned int skmg::readBLTPOSN( std::istream &file, unsigned int num )
     if( type != "POSN" )
     {
         std::cout << "Expected record of type POSN: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found POSN: " << posnSize << std::endl;
     std::cout << "Num points: " << num << std::endl;
@@ -1097,7 +1120,7 @@ unsigned int skmg::readBLTNORM( std::istream &file, unsigned int num )
     if( type != "NORM" )
     {
         std::cout << "Expected record of type NORM: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -1141,7 +1164,7 @@ unsigned int skmg::readTWHD( std::istream &file )
     if( type != "TWHD" )
     {
         std::cout << "Expected record of type TWHD: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -1180,7 +1203,7 @@ unsigned int skmg::readTWDT( std::istream &file )
     if( type != "TWDT" )
     {
         std::cout << "Expected record of type TWDT: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -1228,7 +1251,7 @@ unsigned int skmg::readPIDX( std::istream &file, psdt &newPsdt )
     if( type != "PIDX" )
     {
         std::cout << "Expected record of type PIDX: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -1267,7 +1290,7 @@ unsigned int skmg::readNIDX( std::istream &file, psdt &newPsdt )
     if( type != "NIDX" )
     {
         std::cout << "Expected record of type NIDX: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -1303,7 +1326,7 @@ unsigned int skmg::readVDCL( std::istream &file, psdt &newPsdt )
     if( type != "VDCL" )
     {
         std::cout << "Expected record of type VDCL: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << ": " << vdclSize-8 << " bytes"
               << std::endl;
@@ -1338,7 +1361,7 @@ unsigned int skmg::readNAME( std::istream &file, psdt &newPsdt )
     if( type != "NAME" )
     {
         std::cout << "Expected record of type NAME: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -1368,7 +1391,7 @@ unsigned int skmg::readXFNM( std::istream &file )
     if( type != "XFNM" )
     {
         std::cout << "Expected record of type XFNM: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -1454,7 +1477,7 @@ unsigned int skmg::readBLTHPTS( std::istream &file )
     if( type != "HPTS" )
     {
         std::cout << "Expected record of type HPTS: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 

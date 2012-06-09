@@ -55,19 +55,23 @@ unsigned int stot::readSTOT( std::istream &file )
     unsigned int size;
     std::string form, type;
     total += readFormHeader( file, form, size, type );
-    size += 8;
+    //size += 8;
     if( form != "FORM" )
     {
 	std::cout << "Expected FORM: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found FORM:" << type << std::endl;
 
-    total += readPCNT( file, numNodes );
+    /*total += readPCNT( file, numNodes );
     for( unsigned int i = 0; i < numNodes; ++i )
       {
 	total += readSTOTXXXX( file );
-      }
+      }*/
+
+	total += base::readUnknown(file, size - 4);
+
+
 
     total += readSHOT( file );
 
@@ -91,13 +95,22 @@ void stot::print() const
 
 unsigned int stot::readSTOTXXXX( std::istream &file )
 {
-    unsigned int xxxxSize;
+
+	 unsigned int xxxxSize;
+    std::string type;
+    unsigned int total = readRecordHeader( file, type, xxxxSize );
+
+	base::readUnknown(file, xxxxSize);
+
+	return xxxxSize + 8;
+
+    /*unsigned int xxxxSize;
     std::string type;
     unsigned int total = readRecordHeader( file, type, xxxxSize );
     if( type != "XXXX" )
     {
         std::cout << "Expected record of type XXXX: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -154,7 +167,7 @@ unsigned int stot::readSTOTXXXX( std::istream &file )
     else
       {
 	std::cout << "Unknown: " << property << std::endl;
-	exit( 0 );
+	throw std::exception();
       }
 
     if( xxxxSize == (total-8) )
@@ -168,5 +181,5 @@ unsigned int stot::readSTOTXXXX( std::istream &file )
                   << std::endl;
     }
 
-    return total;
+    return total;*/
 }

@@ -37,6 +37,7 @@ using namespace ml;
 
 shot::shot()
 {
+	scale = 1.f;
 }
 
 shot::~shot()
@@ -64,7 +65,7 @@ unsigned int shot::readSHOT( std::istream &file )
     if( form != "FORM" )
     {
 	std::cout << "Expected Form" << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found form of type: " << type<< std::endl;
 
@@ -102,7 +103,7 @@ unsigned int shot::readDERV( std::istream &file, std::string &filename )
     if( type != "XXXX" )
     {
         std::cout << "Expected record of type XXXX: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -135,14 +136,14 @@ unsigned int shot::readPCNT( std::istream &file, unsigned int &num )
     if( type != "PCNT" )
     {
         std::cout << "Expected record of type PCNT: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
     if( 4 != pcntSize )
       {
         std::cout << "Expected size 4: " << pcntSize << std::endl;
-        exit( 0 );
+        throw std::exception();
       }
     pcntSize += 8;
 
@@ -171,7 +172,7 @@ unsigned int shot::readXXXX( std::istream &file )
     if( type != "XXXX" )
     {
         std::cout << "Expected record of type XXXX: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
     
@@ -301,8 +302,15 @@ unsigned int shot::readXXXX( std::istream &file )
       }
     else if( property == "clientDataFile" )
       {
-	file.seekg( xxxxSize - (property.size() + 1 ), std::ios_base::cur );
-	total += xxxxSize - ( property.size() + 1 );
+	/*file.seekg( xxxxSize - (property.size() + 1 ), std::ios_base::cur );
+	total += xxxxSize - ( property.size() + 1 );*/
+
+		  total += base::read(file, enabled);
+
+		  if (enabled > 0) {
+			  total += base::read(file, clientDataFile);
+
+		  }
       }
     else if( property == "collisionMaterialFlags" )
       {
@@ -336,8 +344,21 @@ unsigned int shot::readXXXX( std::istream &file )
       }
     else if( property == "scale" )
       {
-	file.seekg( xxxxSize - (property.size() + 1 ), std::ios_base::cur );
-	total += xxxxSize - ( property.size() + 1 );
+	/*file.seekg( xxxxSize - (property.size() + 1 ), std::ios_base::cur );
+	total += xxxxSize - ( property.size() + 1 );*/
+
+		  total += base::read(file, enabled);
+
+		  unsigned char unk;
+
+		  total += base::read(file, unk);
+
+		  if (enabled == 1 && unk == 0x20) {
+			  total += base::read(file, scale);
+		  } else if (enabled == 3 && unk == 0x20) {
+			  total += base::read(file, scale);
+			  total += base::read(file, scale);
+		  }
       }
     else if( property == "gameObjectType" )
       {
@@ -382,7 +403,7 @@ unsigned int shot::readXXXX( std::istream &file )
     else
       {
 	std::cout << "Unknown: " << property << std::endl;
-	exit( 0 );
+	throw std::exception();
       }
 
     if( xxxxSize == (total-8) )

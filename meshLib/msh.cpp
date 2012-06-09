@@ -145,7 +145,7 @@ unsigned int msh::readD3DFVF(
 #define D3DFVF_RESERVED2           0x6000
     
   base::read( file, codes );
-  std::bitset <32> bs( codes );
+  std::bitset <32> bs( (int) codes );
 
     std::cout << "D3D Flexible Vertex Format Bits: ";
     std::cout << bs << std::endl;
@@ -286,7 +286,7 @@ unsigned int msh::readMSH( std::istream &file, std::string path )
   if( form != "FORM")
     {
       std::cout << "Expected FORM not: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found " << form << " " << type
 	    << ": " << size-4 << " bytes"
@@ -319,7 +319,7 @@ unsigned int msh::readSPS( std::istream &file )
     if( form != "FORM" || type != "SPS " )
     {
 	std::cout << "Expected Form of type SPS: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found SPS form" << std::endl;
 
@@ -333,7 +333,7 @@ unsigned int msh::readSPS( std::istream &file )
     if( type != "CNT " || cntSize != 4 )
     {
 	std::cout << "Expected CNT record with size 4" << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
 
     unsigned int numGeode;
@@ -379,7 +379,7 @@ unsigned int msh::readGeode( std::istream &file,
     {
 	std::cout << "Geometry id. Expected: " << nodeNumber
 		  << " found: " << number << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
 
     // Read Shader file record
@@ -387,7 +387,7 @@ unsigned int msh::readGeode( std::istream &file,
     if( type != "NAME" )
     {
 	std::cout << "Expected record of type NAME: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     char temp[255];
     std::string shaderName;
@@ -403,7 +403,7 @@ unsigned int msh::readGeode( std::istream &file,
     if( type != "INFO" || size != 4 )
     {
 	std::cout << "Expected record of type INFO: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     unsigned int infoNumber;
     total += base::read( file, infoNumber );
@@ -446,7 +446,7 @@ unsigned int msh::readGeometry( std::istream &file )
     if( form != "FORM" )
     {
 	std::cout << "Expected record of type FORM: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
 
     // Read INFO record
@@ -454,7 +454,7 @@ unsigned int msh::readGeometry( std::istream &file )
     if( type != "INFO" || size != 6 )
     {
 	std::cout << "Expected INFO record of size 8: " << size << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
 
     unsigned int u1;
@@ -472,7 +472,7 @@ unsigned int msh::readGeometry( std::istream &file )
     if( form != "FORM" || type != "VTXA" )
     {
 	std::cout << "Expected FORM of type VTXA: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
 
     // Read next level FORM record.
@@ -480,7 +480,7 @@ unsigned int msh::readGeometry( std::istream &file )
     if( form != "FORM" )
     {
 	std::cout << "Expected record of type FORM: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
 
     // Read INFO record
@@ -488,7 +488,7 @@ unsigned int msh::readGeometry( std::istream &file )
     if( type != "INFO" || size != 8 )
     {
 	std::cout << "Expected INFO record of size 8: " << size << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
 
     unsigned int d3dfvfCodes;
@@ -586,7 +586,7 @@ unsigned int msh::readGeometryINDX( std::istream &file, unsigned int &bytesPerIn
     if( type != "INDX" )
     {
 	std::cout << "Expected INDX record not: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Reading INDX record." << std::endl;
 
@@ -629,7 +629,7 @@ unsigned int msh::readGeometryDATA( std::istream &file,
     if( type != "DATA" )
     {
 	std::cout << "Expected DATA record not: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
 
     unsigned int bytesPerVertex = (size-8)/numVerts;
@@ -652,7 +652,7 @@ unsigned int msh::readGeometryDATA( std::istream &file,
 	std::cerr << "Unsupported vertex size: "
 		  << bytesPerVertex
 		  << std::endl;
-	exit( 0 );
+	throw std::exception();
       }
 
     if( size == total )

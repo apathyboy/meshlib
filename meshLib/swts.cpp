@@ -53,7 +53,7 @@ unsigned int swts::readSWTS( std::istream &file, std::string path )
   if( form != "FORM" )
     {
       std::cout << "Expected FORM: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found " << form << " " << type << std::endl;
 
@@ -75,7 +75,7 @@ unsigned int swts::readSWTS( std::istream &file, std::string path )
 	  else
 	    {
 	      std::cout << "Unexpected form: " << type << std::endl;
-	      exit( 0 );
+	      throw std::exception();
 	    }
 	}
       else if( form == "TEXT" )
@@ -89,7 +89,7 @@ unsigned int swts::readSWTS( std::istream &file, std::string path )
       else
 	{
 	  std::cout << "Unexpected record: " << form << std::endl;
-	  exit( 0 );
+	  throw std::exception();
 	}
     }
 
@@ -121,7 +121,7 @@ unsigned int swts::readDTST( std::istream &file )
     if( type != "0000" )
     {
         std::cout << "Expected record of type 0000: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
     
@@ -166,7 +166,7 @@ unsigned int swts::readDRTS( std::istream &file )
     if( type != "0000" )
     {
         std::cout << "Expected record of type 0000: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
     
@@ -211,7 +211,7 @@ unsigned int swts::readNAME( std::istream &file )
     if( type != "NAME" )
     {
         std::cout << "Expected record of type NAME: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
     
@@ -241,7 +241,7 @@ unsigned int swts::readTEXT( std::istream &file )
     if( type != "TEXT" )
     {
         std::cout << "Expected record of type TEXT: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
     

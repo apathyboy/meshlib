@@ -91,7 +91,7 @@ unsigned int mlod::readINFO( std::istream &file, unsigned short &num )
     if( type != "INFO" )
     {
 	std::cout << "Expected record of type INFO: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found INFO record" << std::endl;
 
@@ -108,7 +108,7 @@ unsigned int mlod::readNAME( std::istream &file, std::string &name )
     if( type != "NAME" )
     {
 	std::cout << "Expected record of type NAME: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found NAME record" << std::endl;
 

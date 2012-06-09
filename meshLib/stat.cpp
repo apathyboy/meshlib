@@ -66,7 +66,7 @@ unsigned int ml::stat::readSTAT( std::istream &file )
     if( form != "FORM" || type != "0000" )
     {
 	std::cout << "Expected Form of type 0000: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found 0000 form" << std::endl;
 

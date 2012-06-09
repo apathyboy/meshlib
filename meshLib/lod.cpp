@@ -79,12 +79,12 @@ unsigned int lod::readLOD( std::istream &file, std::string path )
   if( form != "FORM" )
     {
       std::cout << "Expected Form " << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   if( type != "0007" && type != "0006" && type != "0005")
     {
       std::cout << "Expected type 0005, 0006 or 0007: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
 #else
   total += readFormHeader( file, "0000", size );
@@ -121,7 +121,7 @@ unsigned int lod::readLOD( std::istream &file, std::string path )
 	  else
 	    {
 	      std::cout << "Unexpected FORM: " << type << std::endl;
-	      exit( 0 );
+	      throw std::exception();
 	    }
 	}
       else if( form == "PIVT" )
@@ -135,7 +135,7 @@ unsigned int lod::readLOD( std::istream &file, std::string path )
       else
 	{
 	  std::cout << "Unexpected record: " << form << std::endl;
-	  exit( 0 );
+	  throw std::exception();
 	}
     }
 
@@ -162,7 +162,7 @@ unsigned int lod::readPIVT( std::istream &file )
     if( type != "PIVT" )
     {
 	std::cout << "Expected record of type PIVT: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found PIVT record" << std::endl;
 
@@ -180,7 +180,7 @@ unsigned int lod::readINFO( std::istream &file )
     if( type != "INFO" )
     {
 	std::cout << "Expected record of type INFO: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found INFO record" << std::endl;
 
@@ -218,7 +218,7 @@ unsigned int lod::readCHLD( std::istream &file )
     if( type != "CHLD" )
     {
 	std::cout << "Expected record of type CHLD: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found CHLD record" << std::endl;
 
@@ -286,7 +286,7 @@ unsigned int lod::readRADR( std::istream &file )
     if( type != "INFO" )
     {
 	std::cout << "Expected record of type INFO: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found INFO record" << std::endl;
 
@@ -331,7 +331,7 @@ unsigned int lod::readTEST( std::istream &file )
     if( type != "INFO" )
     {
 	std::cout << "Expected record of type INFO: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found INFO record" << std::endl;
     unsigned int numNodes;
@@ -354,14 +354,14 @@ unsigned int lod::readTEST( std::istream &file )
 	      {
 		std::cout << "Expected Form of type IDTL: "
 			  << type << std::endl;
-		exit( 0 );
+		throw std::exception();
 	      }
 	  }
 	else
 	  {
 	    std::cout << "Expected Form of type IDTL: "
 		      << type << std::endl;
-	    exit( 0 );
+	    throw std::exception();
 	  }
       }
 
@@ -394,7 +394,7 @@ unsigned int lod::readWRIT( std::istream &file )
     if( type != "INFO" )
     {
 	std::cout << "Expected record of type INFO: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found INFO record" << std::endl;
 

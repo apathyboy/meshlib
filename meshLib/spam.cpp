@@ -55,7 +55,7 @@ unsigned int spam::readSPAM( std::istream &file )
     if( form != "FORM" )
     {
 	std::cout << "Expected FORM: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found " << form << " " << type
 	      << ": " << size-4 << " bytes"
@@ -98,7 +98,7 @@ unsigned int spam::readAPPE( std::istream &file )
     if( type != "0000" )
     {
 	std::cout << "Expected record of type 0000: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
 
     while( total < size )
@@ -138,7 +138,7 @@ unsigned int spam::readCLIE( std::istream &file )
     if( type != "0000" )
     {
 	std::cout << "Expected record of type 0000: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
 
     while( total < size )
@@ -178,7 +178,7 @@ unsigned int spam::readPORT( std::istream &file )
     if( type != "0000" )
     {
 	std::cout << "Expected record of type 0000: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
 
     while( total < size )
@@ -217,7 +217,7 @@ unsigned int spam::readSOUN( std::istream &file )
     if( type != "0000" )
     {
 	std::cout << "Expected record of type 0000: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
 
     while( total < size )

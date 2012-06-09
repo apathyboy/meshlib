@@ -24,13 +24,13 @@
 */
 #include <meshLib/base.hpp>
 
+#include <cmath>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <list>
 #include <map>
 #include <memory>
-#include <cmath>
 
 #include <meshLib/trnAffector.hpp>
 #include <meshLib/trnLayer.hpp>

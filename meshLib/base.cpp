@@ -185,7 +185,7 @@ unsigned int base::readFormHeader( std::istream &file,
   if( "FORM" != form )
     {
       std::cout << "Expected FORM, found: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
 
   char tempType[5];
@@ -198,7 +198,7 @@ unsigned int base::readFormHeader( std::istream &file,
     {
       std::cout << "Expected FORM of type " << expectedType
 		<< ", found: " << type << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
 
   return total;

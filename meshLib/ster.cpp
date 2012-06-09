@@ -54,7 +54,7 @@ unsigned int ster::readSTER( std::istream &file )
     if( form != "FORM" )
     {
 	std::cout << "Expected FORM: " << form << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found " << form << " " << type << std::endl;
 
@@ -92,14 +92,14 @@ unsigned int ster::readPCNT( std::istream &file )
     if( type != "PCNT" )
     {
         std::cout << "Expected record of type PCNT: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
     if( 4 != pcntSize )
       {
         std::cout << "Expected size 4: " << pcntSize << std::endl;
-        exit( 0 );
+        throw std::exception();
       }
 
     total += base::read( file, numNodes );
@@ -130,7 +130,7 @@ unsigned int ster::readXXXX( std::istream &file )
     if( type != "XXXX" )
     {
         std::cout << "Expected record of type XXXX: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 

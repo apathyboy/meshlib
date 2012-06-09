@@ -52,7 +52,7 @@ unsigned int cshd::readCSHD( std::istream &file, std::string path )
   if( form != "FORM" )
     {
       std::cout << "Expected FORM: " << form << std::endl;
-      exit( 0 );
+      throw std::exception();
     }
   std::cout << "Found " << form << " " << type << std::endl;
 
@@ -78,13 +78,13 @@ unsigned int cshd::readCSHD( std::istream &file, std::string path )
 	  else
 	    {
 	      std::cout << "Unexpected form: " << type << std::endl;
-	      exit( 0 );
+	      throw std::exception();
 	    }
 	}
       else
 	{
 	  std::cout << "Unexpected record: " << form << std::endl;
-	  exit( 0 );
+	  throw std::exception();
 	}
     }
 
@@ -136,7 +136,7 @@ unsigned int cshd::readPAL( std::istream &file )
     if( type != "PAL " )
     {
         std::cout << "Expected record of type PAL: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
@@ -170,7 +170,7 @@ unsigned int cshd::readTXTR( std::istream &file )
     if( type != "DATA" )
     {
 	std::cout << "Expected record of type DATA: " << type << std::endl;
-	exit( 0 );
+	throw std::exception();
     }
     std::cout << "Found record " << type 
 	      << ": " << size << " bytes" 
@@ -238,7 +238,7 @@ unsigned int cshd::readTX1D( std::istream &file )
     if( type != "TX1D" )
     {
         std::cout << "Expected record of type TX1D: " << type << std::endl;
-        exit( 0 );
+        throw std::exception();
     }
     std::cout << "Found " << type << std::endl;
 
