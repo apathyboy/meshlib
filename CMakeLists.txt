@@ -9,9 +9,15 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/build-aux/cmake")
 include(GroupSourcesByFilesystem)
 include(CheckIncludeFiles)
 
+option(BUILD_TOOLS
+    "Explicitly force building of tools" OFF)
+
 include_directories(
     ${PROJECT_SOURCE_DIR}
 )
 
 add_subdirectory(meshLib)
-add_subdirectory(tools)
+
+if(BUILD_TOOLS)
+    add_subdirectory(tools)
+endif()
