@@ -24,8 +24,10 @@
 */
 
 #include <meshLib/cstb.hpp>
-#include <iostream>
+
+#include <cstdint>
 #include <cstdlib>
+#include <iostream>
 
 #define MAX_SWG_STRING 2048
 
@@ -201,7 +203,7 @@ unsigned int cstb::readSTNG( std::istream &file )
 	     << ": " << size-8 << " bytes"
 	     << std::endl;
 
-   int pos = file.tellg();
+   uint64_t pos = file.tellg();
    
    for( unsigned int i = 0; i < num; ++i )
    { 

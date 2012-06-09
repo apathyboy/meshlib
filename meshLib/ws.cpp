@@ -25,8 +25,9 @@
 
 #include <meshLib/ws.hpp>
 
-#include <iostream>
+#include <cstdint>
 #include <cstdlib>
+#include <iostream>
 
 #define RAD2DEG (180.0/3.141592653589793116)
 #define DEG2RAD (3.141592653589793116/180.0)
@@ -157,10 +158,10 @@ unsigned int ws::createWS( std::ofstream &outfile )
     unsigned int total = 0;
 
     // Write form with dummy size
-    unsigned int form0Position = outfile.tellp();
+    uint64_t form0Position = outfile.tellp();
     writeFormHeader( outfile, 0, "WSNP" );
     // Write form with dummy size
-    unsigned int form1Position = outfile.tellp();
+    uint64_t form1Position = outfile.tellp();
     writeFormHeader( outfile, 0, "0001" );
 
     total += writeNODS( outfile );
@@ -238,7 +239,7 @@ unsigned int ws::writeNODS( std::ofstream &outfile )
 
     //FORM NODS
     // Write form with dummy size
-    unsigned int form0Position = outfile.tellp();
+    uint64_t form0Position = outfile.tellp();
     writeFormHeader( outfile, 0, "NODS" );
 
     // Start writing nodes from beginning of list
@@ -248,7 +249,7 @@ unsigned int ws::writeNODS( std::ofstream &outfile )
 	total += writeNODE( outfile );
     }
 
-    unsigned int nodeEndPosition = outfile.tellp();
+    uint64_t nodeEndPosition = outfile.tellp();
 
     //FORM NODS
     outfile.seekp( form0Position, std::ios_base::beg );
@@ -303,12 +304,12 @@ unsigned int ws::writeNODE( std::ofstream &outfile )
 
     // FORM NODE
     // Write form with dummy size
-    unsigned int form0Position = outfile.tellp();
+    uint64_t form0Position = outfile.tellp();
     writeFormHeader( outfile, 0, "NODE" );
 
     // FORM 0000
     // Write form with dummy size
-    unsigned int form1Position = outfile.tellp();
+    uint64_t form1Position = outfile.tellp();
     writeFormHeader( outfile, 0, "0000" );
 
     total += writeRecordHeader( outfile, "DATA", 52 );
@@ -325,7 +326,7 @@ unsigned int ws::writeNODE( std::ofstream &outfile )
 	  }
       }
 
-    unsigned int nodeEndPosition = outfile.tellp();
+    uint64_t nodeEndPosition = outfile.tellp();
 
     // FORM 0000
     // Rewrite form with proper size.
@@ -424,7 +425,7 @@ unsigned int ws::writeOTNL( std::ofstream &outfile )
   unsigned int total = 0;
 
   // Write form with dummy size
-  unsigned int position = outfile.tellp();
+  uint64_t position = outfile.tellp();
   writeRecordHeader( outfile, "OTNL", total );
 
   unsigned int numObjects = objectNames.size();
@@ -441,7 +442,7 @@ unsigned int ws::writeOTNL( std::ofstream &outfile )
       total += objectNames[i].size()+1;
     }
 
-  unsigned int nodeEndPosition = outfile.tellp();
+  uint64_t nodeEndPosition = outfile.tellp();
 
   // Rewrite form with proper size.
   outfile.seekp( position, std::ios_base::beg );

@@ -26,6 +26,7 @@
 #include <meshLib/base.hpp>
 #include <meshLib/str.hpp>
 
+#include <cstdint>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -42,7 +43,7 @@ str::~str()
 
 bool str::isRightType( std::istream &file )
 {
-    unsigned int position = file.tellg();
+    uint64_t position = file.tellg();
     unsigned int header;
     base::read( file, header );
     file.seekg( position, std::ios_base::beg );
@@ -52,7 +53,7 @@ bool str::isRightType( std::istream &file )
 
 unsigned int str::readSTR( std::istream &file )
 {
-    unsigned int position = file.tellg();
+    uint64_t position = file.tellg();
     unsigned int header;
     unsigned int total = base::read( file, header );
 

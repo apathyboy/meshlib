@@ -24,8 +24,10 @@
 */
 
 #include <meshLib/ilf.hpp>
-#include <iostream>
+
+#include <cstdint>
 #include <cstdlib>
+#include <iostream>
 
 using namespace ml;
 
@@ -64,10 +66,10 @@ unsigned int ilf::createILF( std::istream &infile, std::ofstream &outfile )
     char temp[512];
 
     // Write form with dummy size
-    unsigned int form0Position = outfile.tellp();
+    uint64_t form0Position = outfile.tellp();
     writeFormHeader( outfile, 0, "INLY" );
     // Write form with dummy size
-    unsigned int form1Position = outfile.tellp();
+    uint64_t form1Position = outfile.tellp();
     writeFormHeader( outfile, 0, "0000" );
 
     while( !infile.eof() )
