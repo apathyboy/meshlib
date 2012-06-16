@@ -43,7 +43,7 @@ namespace ml
   public:
     base() {};
     virtual ~base() {};
-    virtual bool isRightType(){ return false; }
+    virtual bool isRightType( std::istream & /*file*/ ){ return false; }
     static std::string getType( std::istream &file );
     unsigned int readBASE(){ return 0; }
     virtual bool canWrite() const { return false; }
