@@ -19,7 +19,7 @@ namespace iff {
 
         uint32_t readARGD(std::istream& input);
 
-        const std::vector<std::vector<std::string>>& getSlotArrangement() const;
+        const std::vector<std::vector<std::string>>& getSlotArrangements() const;
 
     private:
         uint32_t read0000(std::istream& input);

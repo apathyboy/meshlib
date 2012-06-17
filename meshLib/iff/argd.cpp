@@ -26,6 +26,11 @@ uint32_t argd::readARGD(std::istream& input)
     return total;
 }
 
+const std::vector<std::vector<std::string>>& argd::getSlotArrangements() const
+{
+    return slot_arrangements_;
+}
+
 uint32_t argd::read0000(std::istream& input)
 {
     uint32_t size, total, read_size = 0;
@@ -45,18 +50,21 @@ uint32_t argd::read0000(std::istream& input)
         std::string arg_header;
         uint32_t arg_size, arg_read_size = 0;
         read_size += readRecordHeader(input, arg_header, arg_size);
-
-        std::vector<std::string> slots;
-        while (arg_read_size < arg_size)
+        read_size += 4;
+        if (arg_size > 0)
         {
-            std::string slot_name;
-            arg_read_size += read(input, slot_name);
+            std::vector<std::string> slots;
+            while (arg_read_size < arg_size)
+            {
+                std::string slot_name;
+                arg_read_size += read(input, slot_name);
 
-            slots.push_back(slot_name);
+                slots.push_back(slot_name);
+            }
+
+            read_size += arg_read_size;
+            slot_arrangements_.push_back(std::move(slots));
         }
-
-        read_size += arg_read_size;
-        slot_arrangements_.push_back(std::move(slots));
     }
 
     return total += read_size;
